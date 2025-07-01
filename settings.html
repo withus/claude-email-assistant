@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Email Assistant - Settings</title>
+  <style>
+    body {
+      width: 450px;
+      max-height: 600px;
+      padding: 0;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #f8fafc;
+      overflow-y: auto;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #6B46C1 0%, #553C9A 100%);
+      color: white;
+      padding: 16px 20px;
+      text-align: center;
+    }
+    
+    .header h1 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    
+    .container {
+      padding: 20px;
+    }
+    
+    .section {
+      background: white;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #374151;
+      margin: 0 0 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .form-group {
+      margin-bottom: 16px;
+    }
+    
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      color: #374151;
+      font-size: 13px;
+    }
+    
+    input[type="text"], input[type="password"], select, textarea {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 13px;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+    
+    input[type="password"] {
+      font-family: monospace;
+    }
+    
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #6B46C1;
+      box-shadow: 0 0 0 3px rgba(107, 70, 193, 0.1);
+    }
+    
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+      font-family: inherit;
+    }
+    
+    .signature-textarea {
+      min-height: 100px;
+    }
+    
+    .prompt-textarea {
+      min-height: 120px;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 12px;
+    }
+    
+    select {
+      cursor: pointer;
+    }
+    
+    .input-wrapper {
+      position: relative;
+    }
+    
+    .toggle-visibility {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: white;
+      border: none;
+      color: #6B46C1;
+      cursor: pointer;
+      padding: 4px 8px;
+      font-size: 14px;
+      line-height: 1;
+    }
+    
+    .range-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .range-input {
+      flex: 1;
+    }
+    
+    .range-value {
+      min-width: 60px;
+      text-align: center;
+      font-weight: 600;
+      color: #6B46C1;
+      font-size: 13px;
+    }
+    
+    .buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    
+    button {
+      flex: 1;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .btn-primary {
+      background-color: #6B46C1;
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background-color: #553C9A;
+    }
+    
+    .btn-secondary {
+      background-color: #f3f4f6;
+      color: #374151;
+    }
+    
+    .btn-secondary:hover {
+      background-color: #e5e7eb;
+    }
+    
+    .status {
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      text-align: center;
+      display: none;
+    }
+    
+    .status.success {
+      background-color: #d1fae5;
+      color: #065f46;
+      display: block;
+    }
+    
+    .status.error {
+      background-color: #fee2e2;
+      color: #991b1b;
+      display: block;
+    }
+    
+    .help-text {
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+    
+    .model-info {
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 2px;
+    }
+    
+    .signature-preview {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 4px;
+      padding: 8px;
+      margin-top: 8px;
+      font-size: 12px;
+      color: #374151;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🤖 Claude Email Assistant</h1>
+  </div>
+  
+  <div class="container">
+    <!-- API Configuration -->
+    <div class="section">
+      <h3 class="section-title">🔑 API Configuration</h3>
+      
+      <div class="form-group">
+        <label for="apiKey">Claude API Key:</label>
+        <div class="input-wrapper">
+          <input type="password" id="apiKey" placeholder="sk-ant-api03-..." autocomplete="off">
+          <button type="button" class="toggle-visibility" id="toggleApiKey">👁️</button>
+        </div>
+        <div class="help-text">Available at <a href="https://console.anthropic.com/account/keys" target="_blank">console.anthropic.com</a></div>
+      </div>
+      
+      <div class="form-group">
+        <label for="model">Claude Model:</label>
+        <select id="model">
+          <option value="claude-3-5-haiku-20241022">Claude 3.5 Haiku (Cost-Effective)</option>
+          <option value="claude-3-5-sonnet-20241022">Claude 3.5 Sonnet (Balanced)</option>
+          <option value="claude-3-opus-20240229">Claude 3 Opus (Premium)</option>
+        </select>
+        <div class="model-info" id="modelInfo">Fastest and most affordable option</div>
+      </div>
+    </div>
+
+    <!-- Response Settings -->
+    <div class="section">
+      <h3 class="section-title">📝 Response Settings</h3>
+      
+      <div class="form-group">
+        <label for="maxTokens">Response Length:</label>
+        <div class="range-group">
+          <input type="range" id="maxTokens" class="range-input" min="200" max="2000" step="100" value="1000">
+          <span class="range-value" id="maxTokensValue">1000</span>
+        </div>
+        <div class="help-text">200 = Short, 1000 = Normal, 2000 = Detailed</div>
+      </div>
+      
+      <div class="form-group">
+        <label for="responseStyle">Default Response Style:</label>
+        <select id="responseStyle">
+          <option value="professional">Professional & Friendly</option>
+          <option value="formal">Formal & Polite</option>
+          <option value="casual">Casual & Personal</option>
+          <option value="concise">Short & Precise</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Personal Settings -->
+    <div class="section">
+      <h3 class="section-title">👤 Personal Settings</h3>
+      
+      <div class="form-group">
+        <label for="signature">My Signature:</label>
+        <textarea id="signature" class="signature-textarea" placeholder="Best regards,
+
+John Doe
+Senior Developer
+john@example.com
++1 234 567 8900"></textarea>
+        <div class="help-text">Automatically added to every response</div>
+        <div class="signature-preview" id="signaturePreview" style="display: none;"></div>
+      </div>
+      
+      <div class="form-group">
+        <label for="defaultSender">My Name (for salutation):</label>
+        <input type="text" id="defaultSender" placeholder="John Doe">
+        <div class="help-text">Helps Claude with proper addressing</div>
+      </div>
+    </div>
+
+    <!-- Advanced -->
+    <div class="section">
+      <h3 class="section-title">⚙️ Advanced Settings</h3>
+      
+      <div class="form-group">
+        <label for="customPrompt">System Prompt (Claude Instructions):</label>
+        <textarea id="customPrompt" class="prompt-textarea" placeholder="You are a professional email assistant..."></textarea>
+        <div class="help-text">Leave empty for default. Here you can give Claude specific instructions.</div>
+      </div>
+      
+      <div class="form-group">
+        <label for="language">Response Language:</label>
+        <select id="language">
+          <option value="en">English</option>
+          <option value="de">German</option>
+          <option value="auto">Auto-detect</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button type="button" class="btn-secondary" id="resetButton">Reset</button>
+      <button type="button" class="btn-primary" id="saveButton">Save</button>
+    </div>
+    
+    <div id="status" class="status"></div>
+  </div>
+  
+  <script src="settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Email Assistant</title>
+  <style>
+    body {
+      width: 350px;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+    }
+    
+    .container {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    h1 {
+      margin: 0 0 20px 0;
+      font-size: 20px;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #555;
+      font-size: 14px;
+    }
+    
+    input[type="password"], input[type="text"] {
+      width: 100%;
+      padding: 10px 40px 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      box-sizing: border-box;
+      font-family: monospace;
+    }
+    
+    input[type="password"]:focus, input[type="text"]:focus {
+      outline: none;
+      border-color: #6B46C1;
+      box-shadow: 0 0 0 2px rgba(107, 70, 193, 0.1);
+    }
+    
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #6B46C1;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    button:hover {
+      background-color: #553C9A;
+    }
+    
+    button:active {
+      transform: translateY(1px);
+    }
+    
+    .status {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 4px;
+      font-size: 14px;
+      text-align: center;
+      display: none;
+    }
+    
+    .status.success {
+      background-color: #D1FAE5;
+      color: #065F46;
+      display: block;
+    }
+    
+    .status.error {
+      background-color: #FEE2E2;
+      color: #991B1B;
+      display: block;
+    }
+    
+    .info {
+      margin-top: 20px;
+      padding: 12px;
+      background-color: #EFF6FF;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #1E40AF;
+      line-height: 1.5;
+    }
+    
+    .info a {
+      color: #1E40AF;
+      text-decoration: underline;
+    }
+    
+    .toggle-visibility {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: white;
+      border: none;
+      color: #6B46C1;
+      cursor: pointer;
+      padding: 4px 8px;
+      font-size: 16px;
+      width: auto;
+      height: auto;
+      line-height: 1;
+    }
+    
+    .input-wrapper {
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>
+      <span>🤖</span>
+      Claude Email Assistant
+    </h1>
+    
+    <div class="form-group">
+      <label for="apiKey">Claude API Key:</label>
+      <div class="input-wrapper">
+        <input type="password" id="apiKey" placeholder="sk-ant-api03-..." autocomplete="off">
+        <button type="button" class="toggle-visibility" id="toggleVisibility">👁️</button>
+      </div>
+    </div>
+    
+    <button id="saveButton">Speichern</button>
+    
+    <div id="status" class="status"></div>
+    
+    <div class="info">
+      <strong>Hinweis:</strong> Du benötigst einen Claude API Key von 
+      <a href="https://console.anthropic.com/account/keys" target="_blank">console.anthropic.com</a>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

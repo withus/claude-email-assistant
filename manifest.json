@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "Claude Email Assistant",
+  "version": "1.0.0",
+  "description": "AI-powered email responses with Claude directly in Gmail",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://mail.google.com/*",
+    "https://api.anthropic.com/*"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["modal.css"],
+      "matches": ["https://mail.google.com/*"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "settings.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
