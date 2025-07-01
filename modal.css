@@ -1,5 +1,15 @@
 /* Claude Email Assistant Modal Styles */
 
+/* Spinning animation for loading states (added for inline spinners) */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .claude-modal {
   position: fixed;
   top: 0;
@@ -40,7 +50,7 @@
 }
 
 .claude-modal-header {
-  background: linear-gradient(135deg, #6B46C1 0%, #553C9A 100%);
+  background: linear-gradient(135deg, #7B5FB2 0%, #4A90E2 100%);
   color: white;
   padding: 16px 20px;
   display: flex;
@@ -138,8 +148,8 @@
 
 .claude-response-textarea:focus {
   outline: none;
-  border-color: #6B46C1;
-  box-shadow: 0 0 0 3px rgba(107, 70, 193, 0.1);
+  border-color: #7B5FB2;
+  box-shadow: 0 0 0 3px rgba(123, 95, 178, 0.1);
 }
 
 .claude-word-count {
@@ -189,7 +199,7 @@
 }
 
 .claude-chat-user .claude-chat-avatar {
-  background: #6B46C1;
+  background: linear-gradient(135deg, #7B5FB2 0%, #4A90E2 100%);
   color: white;
 }
 
@@ -209,9 +219,9 @@
 }
 
 .claude-chat-user .claude-chat-content {
-  background: #6B46C1;
+  background: linear-gradient(135deg, #7B5FB2 0%, #4A90E2 100%);
   color: white;
-  border-color: #6B46C1;
+  border-color: #7B5FB2;
 }
 
 .claude-chat-input-container {
@@ -235,12 +245,12 @@
 
 .claude-chat-input:focus {
   outline: none;
-  border-color: #6B46C1;
-  box-shadow: 0 0 0 2px rgba(107, 70, 193, 0.1);
+  border-color: #7B5FB2;
+  box-shadow: 0 0 0 2px rgba(123, 95, 178, 0.1);
 }
 
 .claude-chat-send {
-  background: #6B46C1;
+  background: linear-gradient(135deg, #7B5FB2 0%, #4A90E2 100%);
   color: white;
   border: none;
   border-radius: 6px;
@@ -248,12 +258,14 @@
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
   align-self: flex-end;
 }
 
 .claude-chat-send:hover {
-  background: #553C9A;
+  background: linear-gradient(135deg, #6B4FA2 0%, #3A80D2 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .claude-chat-send:disabled {
@@ -332,12 +344,14 @@
 }
 
 .claude-btn-primary {
-  background: #6B46C1;
+  background: linear-gradient(135deg, #7B5FB2 0%, #4A90E2 100%);
   color: white;
 }
 
 .claude-btn-primary:hover {
-  background: #553C9A;
+  background: linear-gradient(135deg, #6B4FA2 0%, #3A80D2 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .claude-btn-success {
@@ -367,15 +381,12 @@
   width: 16px;
   height: 16px;
   border: 2px solid #e5e7eb;
-  border-top: 2px solid #6B46C1;
+  border-top: 2px solid #7B5FB2;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+/* Animation already defined at top */
 
 /* Responsive */
 @media (max-width: 768px) {

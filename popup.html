@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,14 +53,14 @@
     
     input[type="password"]:focus, input[type="text"]:focus {
       outline: none;
-      border-color: #6B46C1;
-      box-shadow: 0 0 0 2px rgba(107, 70, 193, 0.1);
+      border-color: #7B5FB2;
+      box-shadow: 0 0 0 2px rgba(123, 95, 178, 0.1);
     }
     
     button {
       width: 100%;
       padding: 12px;
-      background-color: #6B46C1;
+      background: linear-gradient(135deg, #7B5FB2 0%, #4A90E2 100%);
       color: white;
       border: none;
       border-radius: 4px;
@@ -71,7 +71,9 @@
     }
     
     button:hover {
-      background-color: #553C9A;
+      background: linear-gradient(135deg, #6B4FA2 0%, #3A80D2 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     
     button:active {
@@ -121,7 +123,7 @@
       transform: translateY(-50%);
       background: white;
       border: none;
-      color: #6B46C1;
+      color: #7B5FB2;
       cursor: pointer;
       padding: 4px 8px;
       font-size: 16px;
@@ -138,7 +140,7 @@
 <body>
   <div class="container">
     <h1>
-      <span>🤖</span>
+      <img src="icon48.png" style="width: 28px; height: 28px; vertical-align: middle;">
       Claude Email Assistant
     </h1>
     
@@ -150,12 +152,12 @@
       </div>
     </div>
     
-    <button id="saveButton">Speichern</button>
+    <button id="saveButton">Save</button>
     
     <div id="status" class="status"></div>
     
     <div class="info">
-      <strong>Hinweis:</strong> Du benötigst einen Claude API Key von 
+      <strong>Note:</strong> You need a Claude API Key from 
       <a href="https://console.anthropic.com/account/keys" target="_blank">console.anthropic.com</a>
     </div>
   </div>

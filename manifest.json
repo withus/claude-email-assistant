@@ -13,7 +13,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["modal.css"],
+      "resources": ["modal.css", "icon20.png", "icon24.png"],
       "matches": ["https://mail.google.com/*"]
     }
   ],

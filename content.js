@@ -7,24 +7,24 @@ cssLink.rel = 'stylesheet';
 cssLink.href = chrome.runtime.getURL('modal.css');
 document.head.appendChild(cssLink);
 
-// Fügt Claude Button zu jeder Email hinzu
+// Add Claude button to each email
 function addClaudeButtons() {
   // Finde alle Email Container
   const emails = document.querySelectorAll('[role="listitem"]');
   
   emails.forEach(email => {
-    // Skip wenn Button schon existiert
+    // Skip if button already exists
     if (email.querySelector('.claude-reply-btn')) return;
     
-    // Finde die Action Bar (wo Reply, Forward etc. sind)
+    // Find the action bar (where Reply, Forward etc. are)
     const actionBar = email.querySelector('[role="toolbar"], [aria-label*="More"], .btC');
     if (!actionBar) return;
     
-    // Claude Button erstellen
+    // Create Claude button
     const claudeBtn = createClaudeButton();
     claudeBtn.addEventListener('click', () => handleClaudeReply(email));
     
-    // Button einfügen
+    // Insert button
     const firstButton = actionBar.querySelector('[role="button"]');
     if (firstButton) {
       firstButton.parentElement.insertBefore(claudeBtn, firstButton);
@@ -34,14 +34,14 @@ function addClaudeButtons() {
   });
 }
 
-// Erstellt den Claude Button
+// Creates the Claude button
 function createClaudeButton() {
   const button = document.createElement('div');
   button.className = 'claude-reply-btn T-I J-J5-Ji T-I-Js-IF aaq T-I-ax7 L3';
   button.setAttribute('role', 'button');
   button.style.cssText = `
     margin-right: 8px;
-    background-color: #6B46C1;
+    background: linear-gradient(135deg, #7B5FB2 0%, #4A90E2 100%);
     color: white;
     border-radius: 4px;
     padding: 0 12px;
@@ -52,26 +52,33 @@ function createClaudeButton() {
     font-size: 14px;
     font-weight: 500;
   `;
-  button.innerHTML = '🤖 ' + chrome.i18n.getMessage('button_text');
+  // Create icon element
+  const icon = document.createElement('img');
+  icon.src = chrome.runtime.getURL('icon20.png');
+  icon.style.cssText = 'width: 20px; height: 20px; margin-right: 6px; vertical-align: middle;';
+  
+  button.innerHTML = '';
+  button.appendChild(icon);
+  button.appendChild(document.createTextNode(chrome.i18n.getMessage('button_text')));
   
   // Hover Effect
   button.addEventListener('mouseenter', () => {
-    button.style.backgroundColor = '#553C9A';
+    button.style.background = 'linear-gradient(135deg, #6B4FA2 0%, #3A80D2 100%)';
   });
   button.addEventListener('mouseleave', () => {
-    button.style.backgroundColor = '#6B46C1';
+    button.style.background = 'linear-gradient(135deg, #7B5FB2 0%, #4A90E2 100%)';
   });
   
   return button;
 }
 
-// Hauptfunktion: Email lesen und Antwort generieren
+// Main function: Read email and generate response
 async function handleClaudeReply(emailElement) {
   try {
-    // Button Status ändern
+    // Change button status
     const button = emailElement.querySelector('.claude-reply-btn');
     const originalText = button.innerHTML;
-    button.innerHTML = '⏳ Reading email...';
+    button.innerHTML = '<span style="display: inline-block; animation: spin 1s linear infinite; margin-right: 6px;">⏳</span> ' + chrome.i18n.getMessage('button_loading');
     button.style.pointerEvents = 'none';
     
     // Extract email content
@@ -81,12 +88,12 @@ async function handleClaudeReply(emailElement) {
       throw new Error('Could not read email content');
     }
     
-    button.innerHTML = '⏳ Claude is thinking...';
+    button.innerHTML = '<span style="display: inline-block; animation: spin 1s linear infinite; margin-right: 6px;">⏳</span> ' + chrome.i18n.getMessage('button_thinking');
     
-    // Settings holen (inkl. API Key)
+    // Get settings (including API key)
     const settings = await getSettings();
     
-    // Fallback: Prüfe auch alten claudeApiKey
+    // Fallback: Check old claudeApiKey too
     let apiKey = settings.apiKey;
     if (!apiKey) {
       try {
@@ -104,9 +111,9 @@ async function handleClaudeReply(emailElement) {
     // Claude API Call
     const reply = await generateClaudeReply(emailData, apiKey);
     
-    button.innerHTML = '✍️ Inserting reply...';
+    button.innerHTML = '<span style="margin-right: 6px;">✍️</span> ' + chrome.i18n.getMessage('button_inserting');
     
-    // Reply Button finden - verschiedene Selektoren probieren
+    // Find reply button - try different selectors
     const replySelectors = [
       '[role="button"][aria-label*="Reply"]',
       '[role="button"][data-tooltip*="Reply"]', 
@@ -126,20 +133,34 @@ async function handleClaudeReply(emailElement) {
       if (replyButton) break;
     }
     
-    // Öffne Preview Modal statt direkt einfügen
+    // Open preview modal instead of direct insert
     await openPreviewModal(emailData, reply);
     
-    button.innerHTML = originalText;
+    // Restore original button content with icon
+    const icon = document.createElement('img');
+    icon.src = chrome.runtime.getURL('icon20.png');
+    icon.style.cssText = 'width: 20px; height: 20px; margin-right: 6px; vertical-align: middle;';
+    
+    button.innerHTML = '';
+    button.appendChild(icon.cloneNode(true));
+    button.appendChild(document.createTextNode(chrome.i18n.getMessage('button_text')));
     button.style.pointerEvents = 'auto';
     
   } catch (error) {
     console.error('Claude Email Assistant Error:', error);
     alert(chrome.i18n.getMessage('error_generic') + ': ' + error.message);
     
-    // Button zurücksetzen
+    // Reset button
     const button = emailElement.querySelector('.claude-reply-btn');
     if (button) {
-      button.innerHTML = '🤖 ' + chrome.i18n.getMessage('button_text');
+      // Create icon element
+  const icon = document.createElement('img');
+  icon.src = chrome.runtime.getURL('icon20.png');
+  icon.style.cssText = 'width: 20px; height: 20px; margin-right: 6px; vertical-align: middle;';
+  
+  button.innerHTML = '';
+  button.appendChild(icon);
+  button.appendChild(document.createTextNode(chrome.i18n.getMessage('button_text')));
       button.style.pointerEvents = 'auto';
     }
   }
@@ -154,7 +175,7 @@ function extractEmailContent(emailElement) {
     timestamp: ''
   };
   
-  // Betreff
+  // Subject
   const subjectElement = emailElement.querySelector('[data-legacy-thread-id] span') || 
                         emailElement.querySelector('.bog') ||
                         emailElement.querySelector('[role="heading"]');
@@ -162,7 +183,7 @@ function extractEmailContent(emailElement) {
     data.subject = subjectElement.textContent.trim();
   }
   
-  // Absender
+  // Sender
   const senderElement = emailElement.querySelector('.yW span[email]') || 
                        emailElement.querySelector('.gD') ||
                        emailElement.querySelector('[email]');
@@ -170,7 +191,7 @@ function extractEmailContent(emailElement) {
     data.sender = senderElement.getAttribute('email') || senderElement.textContent.trim();
   }
   
-  // Email Inhalt - verschiedene Selektoren probieren
+  // Email content - try different selectors
   const contentSelectors = [
     '.ii.gt',
     '[dir="ltr"]',
@@ -187,7 +208,7 @@ function extractEmailContent(emailElement) {
     }
   }
   
-  // Zeitstempel
+  // Timestamp
   const timeElement = emailElement.querySelector('.xW span[title]') || 
                      emailElement.querySelector('.g3');
   if (timeElement) {

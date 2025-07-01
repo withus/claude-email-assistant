@@ -1,4 +1,4 @@
-// Popup Script für Claude Email Assistant
+// Popup Script for Claude Email Assistant
 
 document.addEventListener('DOMContentLoaded', async () => {
   const apiKeyInput = document.getElementById('apiKey');
@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const statusDiv = document.getElementById('status');
   const toggleButton = document.getElementById('toggleVisibility');
 
-  // API Key laden
+  // Load API Key
   const result = await chrome.storage.sync.get(['claudeApiKey']);
   if (result.claudeApiKey) {
     apiKeyInput.value = result.claudeApiKey;
@@ -28,25 +28,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     const apiKey = apiKeyInput.value.trim();
     
     if (!apiKey) {
-      showStatus('Bitte einen API Key eingeben!', 'error');
+      showStatus('Please enter an API Key!', 'error');
       return;
     }
     
-    // Validiere API Key Format
+    // Validate API Key format
     if (!apiKey.startsWith('sk-ant-')) {
-      showStatus('API Key sollte mit "sk-ant-" beginnen', 'error');
+      showStatus('API Key should start with "sk-ant-"', 'error');
       return;
     }
     
     try {
-      // Speichere API Key
+      // Save API Key
       await chrome.storage.sync.set({ claudeApiKey: apiKey });
       
       // Skip API validation - often fails due to CORS
-      showStatus('✅ API Key gespeichert!', 'success');
+      showStatus('✅ API Key saved!', 'success');
       
     } catch (error) {
-      showStatus('Fehler beim Speichern: ' + error.message, 'error');
+      showStatus('Error saving: ' + error.message, 'error');
     }
   });
 
@@ -57,18 +57,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  // Status anzeigen
+  // Show status
   function showStatus(message, type) {
     statusDiv.textContent = message;
     statusDiv.className = `status ${type}`;
     
-    // Auto-hide nach 5 Sekunden
+    // Auto-hide after 5 seconds
     setTimeout(() => {
       statusDiv.className = 'status';
     }, 5000);
   }
 
-  // API Key testen (optional)
+  // Test API Key (optional)
   async function testApiKey(apiKey) {
     try {
       const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       
       return response.ok;
     } catch (error) {
-      console.error('API Test Fehler:', error);
+      console.error('API Test Error:', error);
       return false;
     }
   }
