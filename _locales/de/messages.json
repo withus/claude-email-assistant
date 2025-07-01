@@ -1,0 +1,121 @@
+{
+  "extension_name": {
+    "message": "Claude E-Mail Assistent"
+  },
+  "extension_description": {
+    "message": "KI-gestützte E-Mail-Antworten mit Claude direkt in Gmail"
+  },
+  "button_text": {
+    "message": "Claude Antwort"
+  },
+  "button_loading": {
+    "message": "Lese E-Mail..."
+  },
+  "button_thinking": {
+    "message": "Claude denkt nach..."
+  },
+  "button_inserting": {
+    "message": "Füge Antwort ein..."
+  },
+  "error_no_content": {
+    "message": "Konnte E-Mail-Inhalt nicht lesen"
+  },
+  "error_no_api_key": {
+    "message": "Bitte Claude API-Schlüssel in den Erweiterungseinstellungen eingeben!"
+  },
+  "error_generic": {
+    "message": "Fehler"
+  },
+  "modal_title": {
+    "message": "Claude Antwort Vorschau"
+  },
+  "section_original": {
+    "message": "Original E-Mail"
+  },
+  "section_response": {
+    "message": "Claudes Antwort"
+  },
+  "section_chat": {
+    "message": "Mit Claude chatten"
+  },
+  "section_actions": {
+    "message": "Schnellaktionen"
+  },
+  "from_label": {
+    "message": "Von"
+  },
+  "subject_label": {
+    "message": "Betreff"
+  },
+  "no_subject": {
+    "message": "Kein Betreff"
+  },
+  "unknown_sender": {
+    "message": "Unbekannt"
+  },
+  "no_content": {
+    "message": "Kein Inhalt gefunden"
+  },
+  "word_count": {
+    "message": "$COUNT$ Wörter",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "chat_placeholder": {
+    "message": "Was soll geändert werden? (z.B. 'Mach es höflicher' oder 'Füge einen Terminvorschlag hinzu')"
+  },
+  "chat_send": {
+    "message": "Senden"
+  },
+  "chat_thinking": {
+    "message": "Denkt nach..."
+  },
+  "response_updated": {
+    "message": "Antwort aktualisiert!"
+  },
+  "action_polite": {
+    "message": "Höflicher"
+  },
+  "action_shorter": {
+    "message": "Kürzer"
+  },
+  "action_formal": {
+    "message": "Formeller"
+  },
+  "action_casual": {
+    "message": "Lockerer"
+  },
+  "action_apologetic": {
+    "message": "Entschuldigung hinzufügen"
+  },
+  "action_regenerate": {
+    "message": "Neu generieren"
+  },
+  "button_copy": {
+    "message": "Kopieren"
+  },
+  "button_close": {
+    "message": "Schließen"
+  },
+  "button_accept": {
+    "message": "In Gmail einfügen"
+  },
+  "toast_copied": {
+    "message": "Text kopiert!"
+  },
+  "toast_inserted": {
+    "message": "Antwort in Gmail eingefügt!"
+  },
+  "toast_reply_not_found": {
+    "message": "Antwort-Button nicht gefunden. Text wurde in die Zwischenablage kopiert!"
+  },
+  "error_extension_invalidated": {
+    "message": "Erweiterungskontext ungültig. Bitte Gmail neu laden!"
+  },
+  "action_working": {
+    "message": "Arbeite..."
+  }
+}
