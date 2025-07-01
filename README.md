@@ -26,7 +26,7 @@ Claude Email Assistant is a Chrome extension that brings the power of Anthropic'
 ⚡ **Quick Actions** - Make responses more polite, shorter, formal, etc.  
 🔄 **Preview Modal** - Review and edit before inserting  
 📝 **Custom Signatures** - Automatically add your signature  
-🌐 **Multi-language Support** - English, German, and auto-detect  
+🌐 **Multi-language Support** - English, Spanish, Chinese (Simplified), Portuguese, French  
 💰 **Cost Optimization** - Uses Claude 3.5 Haiku for 73% cost savings  
 ⚙️ **Customizable Prompts** - Define your own AI instructions  
 

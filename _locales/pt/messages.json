@@ -1,0 +1,121 @@
+{
+  "extension_name": {
+    "message": "Claude Assistente de Email"
+  },
+  "extension_description": {
+    "message": "Respostas de email com IA usando Claude diretamente no Gmail"
+  },
+  "button_text": {
+    "message": "Resposta Claude"
+  },
+  "button_loading": {
+    "message": "Lendo email..."
+  },
+  "button_thinking": {
+    "message": "Claude está pensando..."
+  },
+  "button_inserting": {
+    "message": "Inserindo resposta..."
+  },
+  "error_no_content": {
+    "message": "Não foi possível ler o conteúdo do email"
+  },
+  "error_no_api_key": {
+    "message": "Por favor, insira a chave API do Claude nas configurações da extensão!"
+  },
+  "error_generic": {
+    "message": "Erro"
+  },
+  "modal_title": {
+    "message": "Prévia da Resposta Claude"
+  },
+  "section_original": {
+    "message": "Email Original"
+  },
+  "section_response": {
+    "message": "Resposta do Claude"
+  },
+  "section_chat": {
+    "message": "Conversar com Claude"
+  },
+  "section_actions": {
+    "message": "Ações Rápidas"
+  },
+  "from_label": {
+    "message": "De"
+  },
+  "subject_label": {
+    "message": "Assunto"
+  },
+  "no_subject": {
+    "message": "Sem Assunto"
+  },
+  "unknown_sender": {
+    "message": "Desconhecido"
+  },
+  "no_content": {
+    "message": "Nenhum conteúdo encontrado"
+  },
+  "word_count": {
+    "message": "$COUNT$ palavras",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "chat_placeholder": {
+    "message": "O que deve ser alterado? (ex: 'Torne mais educado' ou 'Adicione uma sugestão de reunião')"
+  },
+  "chat_send": {
+    "message": "Enviar"
+  },
+  "chat_thinking": {
+    "message": "Pensando..."
+  },
+  "response_updated": {
+    "message": "Resposta atualizada!"
+  },
+  "action_polite": {
+    "message": "Mais Educado"
+  },
+  "action_shorter": {
+    "message": "Mais Curto"
+  },
+  "action_formal": {
+    "message": "Mais Formal"
+  },
+  "action_casual": {
+    "message": "Mais Casual"
+  },
+  "action_apologetic": {
+    "message": "Adicionar Desculpa"
+  },
+  "action_regenerate": {
+    "message": "Regenerar"
+  },
+  "button_copy": {
+    "message": "Copiar"
+  },
+  "button_close": {
+    "message": "Fechar"
+  },
+  "button_accept": {
+    "message": "Inserir no Gmail"
+  },
+  "toast_copied": {
+    "message": "Texto copiado!"
+  },
+  "toast_inserted": {
+    "message": "Resposta inserida no Gmail!"
+  },
+  "toast_reply_not_found": {
+    "message": "Botão de resposta não encontrado. O texto foi copiado para a área de transferência!"
+  },
+  "error_extension_invalidated": {
+    "message": "Contexto da extensão invalidado. Por favor, recarregue o Gmail!"
+  },
+  "action_working": {
+    "message": "Trabalhando..."
+  }
+}

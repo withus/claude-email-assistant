@@ -1,5 +1,5 @@
 // Claude Email Assistant - Content Script
-console.log('Claude Email Assistant loaded!');
+console.log(chrome.i18n.getMessage('extension_name') + ' loaded!');
 
 // Inject CSS
 const cssLink = document.createElement('link');
@@ -52,7 +52,7 @@ function createClaudeButton() {
     font-size: 14px;
     font-weight: 500;
   `;
-  button.innerHTML = '🤖 Claude Reply';
+  button.innerHTML = '🤖 ' + chrome.i18n.getMessage('button_text');
   
   // Hover Effect
   button.addEventListener('mouseenter', () => {
@@ -74,7 +74,7 @@ async function handleClaudeReply(emailElement) {
     button.innerHTML = '⏳ Reading email...';
     button.style.pointerEvents = 'none';
     
-    // Email Inhalt extrahieren
+    // Extract email content
     const emailData = extractEmailContent(emailElement);
     
     if (!emailData.content) {
@@ -134,18 +134,18 @@ async function handleClaudeReply(emailElement) {
     
   } catch (error) {
     console.error('Claude Email Assistant Error:', error);
-    alert('Fehler: ' + error.message);
+    alert(chrome.i18n.getMessage('error_generic') + ': ' + error.message);
     
     // Button zurücksetzen
     const button = emailElement.querySelector('.claude-reply-btn');
     if (button) {
-      button.innerHTML = '🤖 Claude Reply';
+      button.innerHTML = '🤖 ' + chrome.i18n.getMessage('button_text');
       button.style.pointerEvents = 'auto';
     }
   }
 }
 
-// Email Inhalt extrahieren
+// Extract email content
 function extractEmailContent(emailElement) {
   const data = {
     subject: '',
@@ -219,73 +219,78 @@ async function openPreviewModal(emailData, initialReply) {
 function createPreviewModal(emailData, reply) {
   const modal = document.createElement('div');
   modal.className = 'claude-modal';
+  
+  // Get localized strings
+  const i18n = chrome.i18n;
+  const wordCount = reply.split(' ').length;
+  
   modal.innerHTML = `
     <div class="claude-modal-content">
       <div class="claude-modal-header">
-        <h2 class="claude-modal-title">🤖 Claude Reply Preview</h2>
+        <h2 class="claude-modal-title">🤖 ${i18n.getMessage('modal_title')}</h2>
         <button class="claude-modal-close">&times;</button>
       </div>
       
       <div class="claude-modal-body">
         <!-- Original Email -->
         <div class="claude-section">
-          <h3 class="claude-section-title">📧 Original Email</h3>
+          <h3 class="claude-section-title">📧 ${i18n.getMessage('section_original')}</h3>
           <div class="claude-original-email">
             <div class="claude-email-meta">
-              From: ${emailData.sender || 'Unknown'} | 
-              Subject: ${emailData.subject || 'No Subject'} | 
+              ${i18n.getMessage('from_label')}: ${emailData.sender || i18n.getMessage('unknown_sender')} | 
+              ${i18n.getMessage('subject_label')}: ${emailData.subject || i18n.getMessage('no_subject')} | 
               ${emailData.timestamp || ''}
             </div>
-            <div class="claude-email-content">${emailData.content || 'No content found'}</div>
+            <div class="claude-email-content">${emailData.content || i18n.getMessage('no_content')}</div>
           </div>
         </div>
         
         <!-- Response Editor -->
         <div class="claude-section">
-          <h3 class="claude-section-title">✍️ Claude's Response</h3>
+          <h3 class="claude-section-title">✍️ ${i18n.getMessage('section_response')}</h3>
           <div class="claude-response-editor">
             <textarea class="claude-response-textarea" placeholder="Response loading...">${reply}</textarea>
-            <div class="claude-word-count">${reply.split(' ').length} words</div>
+            <div class="claude-word-count">${i18n.getMessage('word_count', [wordCount.toString()])}</div>
           </div>
         </div>
         
         <!-- Chat Interface -->
         <div class="claude-section">
-          <h3 class="claude-section-title">💬 Chat with Claude</h3>
+          <h3 class="claude-section-title">💬 ${i18n.getMessage('section_chat')}</h3>
           <div class="claude-chat-container">
             <div class="claude-chat-history" id="claude-chat-history">
               <!-- Chat messages will be added here -->
             </div>
             <div class="claude-chat-input-container">
               <textarea class="claude-chat-input" id="claude-chat-input" 
-                placeholder="What should be changed? (e.g. 'Make it more polite' or 'Add a meeting suggestion')" 
+                placeholder="${i18n.getMessage('chat_placeholder')}" 
                 rows="1"></textarea>
-              <button class="claude-chat-send" id="claude-chat-send">Send</button>
+              <button class="claude-chat-send" id="claude-chat-send">${i18n.getMessage('chat_send')}</button>
             </div>
           </div>
         </div>
         
         <!-- Quick Actions -->
         <div class="claude-section">
-          <h3 class="claude-section-title">⚡ Quick Actions</h3>
+          <h3 class="claude-section-title">⚡ ${i18n.getMessage('section_actions')}</h3>
           <div class="claude-quick-actions">
-            <button class="claude-quick-action" data-action="polite">🎭 More Polite</button>
-            <button class="claude-quick-action" data-action="shorter">📝 Shorter</button>
-            <button class="claude-quick-action" data-action="formal">👔 More Formal</button>
-            <button class="claude-quick-action" data-action="casual">😊 More Casual</button>
-            <button class="claude-quick-action" data-action="apologetic">🙏 Add Apology</button>
-            <button class="claude-quick-action" data-action="regenerate">🔄 Regenerate</button>
+            <button class="claude-quick-action" data-action="polite">🎭 ${i18n.getMessage('action_polite')}</button>
+            <button class="claude-quick-action" data-action="shorter">📝 ${i18n.getMessage('action_shorter')}</button>
+            <button class="claude-quick-action" data-action="formal">👔 ${i18n.getMessage('action_formal')}</button>
+            <button class="claude-quick-action" data-action="casual">😊 ${i18n.getMessage('action_casual')}</button>
+            <button class="claude-quick-action" data-action="apologetic">🙏 ${i18n.getMessage('action_apologetic')}</button>
+            <button class="claude-quick-action" data-action="regenerate">🔄 ${i18n.getMessage('action_regenerate')}</button>
           </div>
         </div>
       </div>
       
       <div class="claude-modal-footer">
         <div class="claude-footer-left">
-          <button class="claude-btn claude-btn-secondary" id="claude-copy">📋 Copy</button>
+          <button class="claude-btn claude-btn-secondary" id="claude-copy">📋 ${i18n.getMessage('button_copy')}</button>
         </div>
         <div class="claude-footer-right">
-          <button class="claude-btn claude-btn-secondary" id="claude-close">❌ Close</button>
-          <button class="claude-btn claude-btn-success" id="claude-accept">✅ Insert into Gmail</button>
+          <button class="claude-btn claude-btn-secondary" id="claude-close">❌ ${i18n.getMessage('button_close')}</button>
+          <button class="claude-btn claude-btn-success" id="claude-accept">✅ ${i18n.getMessage('button_accept')}</button>
         </div>
       </div>
     </div>
@@ -377,7 +382,7 @@ async function sendChatMessage(modal) {
   // Clear input and disable send
   input.value = '';
   sendBtn.disabled = true;
-  sendBtn.textContent = 'Thinking...';
+  sendBtn.textContent = chrome.i18n.getMessage('chat_thinking');
   
   try {
     // Request change from Claude
@@ -389,13 +394,13 @@ async function sendChatMessage(modal) {
     textarea.dispatchEvent(new Event('input')); // Trigger word count update
     
     // Add Claude response to chat
-    addChatMessage(modal, 'assistant', 'Response updated!');
+    addChatMessage(modal, 'assistant', chrome.i18n.getMessage('response_updated'));
     
   } catch (error) {
-    addChatMessage(modal, 'assistant', `Error: ${error.message}`);
+    addChatMessage(modal, 'assistant', `${chrome.i18n.getMessage('error_generic')}: ${error.message}`);
   } finally {
     sendBtn.disabled = false;
-    sendBtn.textContent = 'Send';
+    sendBtn.textContent = chrome.i18n.getMessage('chat_send');
   }
 }
 
@@ -404,7 +409,7 @@ async function handleQuickAction(modal, action) {
   const originalText = btn.textContent;
   
   btn.classList.add('loading');
-  btn.textContent = '⏳ Working...';
+  btn.textContent = '⏳ ' + chrome.i18n.getMessage('action_working');
   
   const actionPrompts = {
     polite: 'Make the response more polite and friendly',
@@ -425,10 +430,10 @@ async function handleQuickAction(modal, action) {
     
     // Add to chat history
     addChatMessage(modal, 'user', actionPrompts[action]);
-    addChatMessage(modal, 'assistant', 'Antwort wurde angepasst!');
+    addChatMessage(modal, 'assistant', chrome.i18n.getMessage('response_updated'));
     
   } catch (error) {
-    addChatMessage(modal, 'assistant', `Error: ${error.message}`);
+    addChatMessage(modal, 'assistant', `${chrome.i18n.getMessage('error_generic')}: ${error.message}`);
   } finally {
     btn.classList.remove('loading');
     btn.textContent = originalText;
@@ -490,7 +495,7 @@ async function insertReplyIntoGmail(text) {
   } else {
     // Fallback: copy to clipboard
     await navigator.clipboard.writeText(text);
-    showToast('Reply Button nicht gefunden. Text wurde in Zwischenablage kopiert!', 'warning');
+    showToast(chrome.i18n.getMessage('toast_reply_not_found'), 'warning');
   }
 }
 
@@ -603,11 +608,11 @@ async function callClaudeWithContext(messages, systemPrompt, settings) {
         if (response && response.success) {
           resolve(response.data);
         } else {
-          reject(new Error(response?.error || 'Unbekannter Fehler'));
+          reject(new Error(response?.error || 'Unknown error'));
         }
       });
     } catch (error) {
-      reject(new Error('Extension context invalidated. Bitte Gmail neu laden!'));
+      reject(new Error(chrome.i18n.getMessage('error_extension_invalidated')));
     }
   });
 }
@@ -649,7 +654,15 @@ async function getDefaultSystemPrompt(settings) {
   };
   
   const style = styleInstructions[settings.responseStyle] || styleInstructions.professional;
-  const language = settings.language === 'en' ? 'English' : settings.language === 'de' ? 'German' : 'the same language as the original email';
+  const languageMap = {
+    'en': 'English',
+    'es': 'Spanish',
+    'zh_CN': 'Chinese (Simplified)',
+    'pt': 'Portuguese',
+    'fr': 'French',
+    'de': 'German'
+  };
+  const language = languageMap[settings.language] || 'the same language as the original email';
   
   let prompt = `You are a professional email assistant. Write responses that are ${style}.
 
@@ -708,11 +721,11 @@ ${emailData.content}`;
         if (response && response.success) {
           resolve(response.data);
         } else {
-          reject(new Error(response?.error || 'Unbekannter Fehler'));
+          reject(new Error(response?.error || 'Unknown error'));
         }
       });
     } catch (error) {
-      reject(new Error('Extension context invalidated. Bitte Gmail neu laden!'));
+      reject(new Error(chrome.i18n.getMessage('error_extension_invalidated')));
     }
   });
 }

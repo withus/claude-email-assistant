@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Claude Email Assistant",
+  "name": "__MSG_extension_name__",
   "version": "1.0.0",
-  "description": "AI-powered email responses with Claude directly in Gmail",
+  "description": "__MSG_extension_description__",
+  "default_locale": "en",
   "permissions": [
     "storage"
   ],

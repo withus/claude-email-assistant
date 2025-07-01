@@ -1,0 +1,121 @@
+{
+  "extension_name": {
+    "message": "Claude 邮件助手"
+  },
+  "extension_description": {
+    "message": "在Gmail中直接使用Claude AI生成邮件回复"
+  },
+  "button_text": {
+    "message": "Claude 回复"
+  },
+  "button_loading": {
+    "message": "正在读取邮件..."
+  },
+  "button_thinking": {
+    "message": "Claude 正在思考..."
+  },
+  "button_inserting": {
+    "message": "正在插入回复..."
+  },
+  "error_no_content": {
+    "message": "无法读取邮件内容"
+  },
+  "error_no_api_key": {
+    "message": "请在扩展设置中输入Claude API密钥！"
+  },
+  "error_generic": {
+    "message": "错误"
+  },
+  "modal_title": {
+    "message": "Claude 回复预览"
+  },
+  "section_original": {
+    "message": "原始邮件"
+  },
+  "section_response": {
+    "message": "Claude的回复"
+  },
+  "section_chat": {
+    "message": "与Claude对话"
+  },
+  "section_actions": {
+    "message": "快速操作"
+  },
+  "from_label": {
+    "message": "发件人"
+  },
+  "subject_label": {
+    "message": "主题"
+  },
+  "no_subject": {
+    "message": "无主题"
+  },
+  "unknown_sender": {
+    "message": "未知"
+  },
+  "no_content": {
+    "message": "未找到内容"
+  },
+  "word_count": {
+    "message": "$COUNT$ 个字",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "chat_placeholder": {
+    "message": "需要修改什么？（例如：'更礼貌一些'或'添加会议建议'）"
+  },
+  "chat_send": {
+    "message": "发送"
+  },
+  "chat_thinking": {
+    "message": "思考中..."
+  },
+  "response_updated": {
+    "message": "回复已更新！"
+  },
+  "action_polite": {
+    "message": "更礼貌"
+  },
+  "action_shorter": {
+    "message": "更简短"
+  },
+  "action_formal": {
+    "message": "更正式"
+  },
+  "action_casual": {
+    "message": "更随意"
+  },
+  "action_apologetic": {
+    "message": "添加道歉"
+  },
+  "action_regenerate": {
+    "message": "重新生成"
+  },
+  "button_copy": {
+    "message": "复制"
+  },
+  "button_close": {
+    "message": "关闭"
+  },
+  "button_accept": {
+    "message": "插入到Gmail"
+  },
+  "toast_copied": {
+    "message": "文本已复制！"
+  },
+  "toast_inserted": {
+    "message": "回复已插入Gmail！"
+  },
+  "toast_reply_not_found": {
+    "message": "未找到回复按钮。文本已复制到剪贴板！"
+  },
+  "error_extension_invalidated": {
+    "message": "扩展上下文无效。请重新加载Gmail！"
+  },
+  "action_working": {
+    "message": "处理中..."
+  }
+}

@@ -1,0 +1,33 @@
+# Quick GitHub Release Commands
+
+# 1. First, create a new repository on GitHub:
+#    - Go to: https://github.com/new
+#    - Name: claude-email-assistant
+#    - Description: AI-powered email responses with Claude directly in Gmail - Chrome Extension
+#    - Public repository
+#    - DO NOT initialize with README, .gitignore, or license
+
+# 2. After creating the empty repository, run these commands:
+
+cd /root/projekte/claude-email-assistant-en
+
+# Configure git (replace with your details)
+git config user.name "Your Name"
+git config user.email "your.email@example.com"
+
+# Add GitHub remote (replace YOUR_USERNAME)
+git remote add origin https://github.com/YOUR_USERNAME/claude-email-assistant.git
+
+# Rename branch and push
+git branch -M main
+git push -u origin main
+
+# 3. After pushing, create a release:
+#    - Go to: https://github.com/YOUR_USERNAME/claude-email-assistant/releases/new
+#    - Tag: v1.0.0
+#    - Title: Claude Email Assistant v1.0.0 - Initial Release
+#    - Copy description from CHANGELOG.md
+
+# 4. Update repository settings:
+#    - Add topics: chrome-extension, gmail, ai, claude, anthropic
+#    - Enable Issues and Discussions
