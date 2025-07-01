@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Claude Email Assistant Logo](https://via.placeholder.com/128x128/6B46C1/FFFFFF?text=🤖)
+![Claude Email Assistant Logo](icon128.png)
 
 **AI-powered email responses with Claude directly in Gmail**
 
@@ -36,7 +36,7 @@ Claude Email Assistant is a Chrome extension that brings the power of Anthropic'
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/[YOUR_USERNAME]/claude-email-assistant.git
+   git clone https://github.com/withus/claude-email-assistant.git
    cd claude-email-assistant
    ```
 
@@ -206,7 +206,7 @@ We welcome contributions! Here's how to get started:
 1. **Fork the repository**
 2. **Clone your fork**
    ```bash
-   git clone https://github.com/[YOUR_USERNAME]/claude-email-assistant.git
+   git clone https://github.com/withus/claude-email-assistant.git
    ```
 3. **Create a feature branch**
    ```bash
@@ -278,7 +278,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Author
 
-Created by [Your Name] with assistance from Claude AI.
+Created by withus with assistance from Claude AI.
 
 ## Acknowledgments
 
@@ -292,7 +292,7 @@ Created by [Your Name] with assistance from Claude AI.
 If you encounter any issues or have questions:
 
 1. **Check the [Troubleshooting](#troubleshooting) section**
-2. **Search existing [Issues](https://github.com/[YOUR_USERNAME]/claude-email-assistant/issues)**
+2. **Search existing [Issues](https://github.com/withus/claude-email-assistant/issues)**
 3. **Create a new issue** with detailed description and steps to reproduce
 4. **Include browser version, extension version, and console errors**
 
