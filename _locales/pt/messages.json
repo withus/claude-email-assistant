@@ -33,7 +33,7 @@
     "message": "Email Original"
   },
   "section_response": {
-    "message": "Resposta do Claude"
+    "message": "Configurações de Resposta"
   },
   "section_chat": {
     "message": "Conversar com Claude"
@@ -117,5 +117,122 @@
   },
   "action_working": {
     "message": "Trabalhando..."
+  },
+  "settings_title": {
+    "message": "Claude Assistente de Email"
+  },
+  "section_api": {
+    "message": "Configuração da API"
+  },
+  "label_api_key": {
+    "message": "Chave API do Claude:"
+  },
+  "placeholder_api_key": {
+    "message": "sk-ant-api03-..."
+  },
+  "help_api_key": {
+    "message": "Disponível em"
+  },
+  "label_model": {
+    "message": "Modelo Claude:"
+  },
+  "model_haiku": {
+    "message": "Claude 3.5 Haiku (Econômico)"
+  },
+  "model_sonnet": {
+    "message": "Claude 3.5 Sonnet (Equilibrado)"
+  },
+  "model_opus": {
+    "message": "Claude 3 Opus (Premium)"
+  },
+  "model_haiku_desc": {
+    "message": "Opção mais rápida e econômica"
+  },
+  "model_sonnet_desc": {
+    "message": "Desempenho e qualidade equilibrados"
+  },
+  "model_opus_desc": {
+    "message": "Máxima qualidade para respostas complexas"
+  },
+  "label_length": {
+    "message": "Comprimento da Resposta:"
+  },
+  "help_length": {
+    "message": "200 = Curta, 1000 = Normal, 2000 = Detalhada"
+  },
+  "label_style": {
+    "message": "Estilo de Resposta Padrão:"
+  },
+  "style_professional": {
+    "message": "Profissional e Amigável"
+  },
+  "style_formal": {
+    "message": "Formal e Educado"
+  },
+  "style_casual": {
+    "message": "Casual e Pessoal"
+  },
+  "style_concise": {
+    "message": "Breve e Preciso"
+  },
+  "section_personal": {
+    "message": "Configurações Pessoais"
+  },
+  "label_signature": {
+    "message": "Minha Assinatura:"
+  },
+  "placeholder_signature": {
+    "message": "Atenciosamente,\\n\\nJoão Silva\\nDesenvolvedor Sênior\\njoao@exemplo.com\\n+55 11 98765-4321"
+  },
+  "help_signature": {
+    "message": "Adicionada automaticamente a cada resposta"
+  },
+  "label_name": {
+    "message": "Meu Nome (para saudação):"
+  },
+  "placeholder_name": {
+    "message": "João Silva"
+  },
+  "help_name": {
+    "message": "Ajuda o Claude com a saudação adequada"
+  },
+  "section_advanced": {
+    "message": "Configurações Avançadas"
+  },
+  "label_prompt": {
+    "message": "Prompt do Sistema (Instruções para o Claude):"
+  },
+  "placeholder_prompt": {
+    "message": "Você é um assistente profissional de email..."
+  },
+  "help_prompt": {
+    "message": "Deixe vazio para usar o padrão. Aqui você pode dar instruções específicas ao Claude."
+  },
+  "label_language": {
+    "message": "Idioma da Resposta:"
+  },
+  "button_reset": {
+    "message": "Redefinir"
+  },
+  "button_save": {
+    "message": "Salvar"
+  },
+  "save_success": {
+    "message": "Configurações salvas!"
+  },
+  "save_error": {
+    "message": "Erro ao salvar configurações"
+  },
+  "api_key_required": {
+    "message": "Por favor, insira uma chave API!"
+  },
+  "api_key_invalid": {
+    "message": "A chave API deve começar com 'sk-ant-'"
+  },
+  "reset_confirm": {
+    "message": "Realmente deseja redefinir todas as configurações?"
+  },
+  "reset_success": {
+    "message": "Configurações redefinidas"
   }
 }

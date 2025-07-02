@@ -377,7 +377,7 @@ function setupModalEventListeners(modal) {
   modal.querySelector('#claude-copy').addEventListener('click', () => {
     const text = modal.querySelector('.claude-response-textarea').value;
     navigator.clipboard.writeText(text).then(() => {
-      showToast('Text kopiert!', 'success');
+      showToast(chrome.i18n.getMessage('toast_copied'), 'success');
     });
   });
   
@@ -386,7 +386,7 @@ function setupModalEventListeners(modal) {
     const text = modal.querySelector('.claude-response-textarea').value;
     insertReplyIntoGmail(text);
     closeModal(modal);
-    showToast('Antwort in Gmail eingefügt!', 'success');
+    showToast(chrome.i18n.getMessage('toast_inserted'), 'success');
   });
 }
 

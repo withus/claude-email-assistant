@@ -33,7 +33,7 @@
     "message": "Original E-Mail"
   },
   "section_response": {
-    "message": "Claudes Antwort"
+    "message": "Antwort-Einstellungen"
   },
   "section_chat": {
     "message": "Mit Claude chatten"
@@ -117,5 +117,122 @@
   },
   "action_working": {
     "message": "Arbeite..."
+  },
+  "settings_title": {
+    "message": "Claude E-Mail Assistent"
+  },
+  "section_api": {
+    "message": "API-Konfiguration"
+  },
+  "label_api_key": {
+    "message": "Claude API-Schlüssel:"
+  },
+  "placeholder_api_key": {
+    "message": "sk-ant-api03-..."
+  },
+  "help_api_key": {
+    "message": "Verfügbar unter"
+  },
+  "label_model": {
+    "message": "Claude Modell:"
+  },
+  "model_haiku": {
+    "message": "Claude 3.5 Haiku (Kostengünstig)"
+  },
+  "model_sonnet": {
+    "message": "Claude 3.5 Sonnet (Ausgewogen)"
+  },
+  "model_opus": {
+    "message": "Claude 3 Opus (Premium)"
+  },
+  "model_haiku_desc": {
+    "message": "Schnellste und günstigste Option"
+  },
+  "model_sonnet_desc": {
+    "message": "Ausgewogene Leistung und Qualität"
+  },
+  "model_opus_desc": {
+    "message": "Höchste Qualität für komplexe Antworten"
+  },
+  "label_length": {
+    "message": "Antwortlänge:"
+  },
+  "help_length": {
+    "message": "200 = Kurz, 1000 = Normal, 2000 = Ausführlich"
+  },
+  "label_style": {
+    "message": "Standard-Antwortstil:"
+  },
+  "style_professional": {
+    "message": "Professionell & Freundlich"
+  },
+  "style_formal": {
+    "message": "Formal & Höflich"
+  },
+  "style_casual": {
+    "message": "Locker & Persönlich"
+  },
+  "style_concise": {
+    "message": "Kurz & Präzise"
+  },
+  "section_personal": {
+    "message": "Persönliche Einstellungen"
+  },
+  "label_signature": {
+    "message": "Meine Signatur:"
+  },
+  "placeholder_signature": {
+    "message": "Mit freundlichen Grüßen\\n\\nMax Mustermann\\nSenior Entwickler\\nmax@beispiel.de\\n+49 123 456 7890"
+  },
+  "help_signature": {
+    "message": "Wird automatisch zu jeder Antwort hinzugefügt"
+  },
+  "label_name": {
+    "message": "Mein Name (für Anrede):"
+  },
+  "placeholder_name": {
+    "message": "Max Mustermann"
+  },
+  "help_name": {
+    "message": "Hilft Claude bei der korrekten Anrede"
+  },
+  "section_advanced": {
+    "message": "Erweiterte Einstellungen"
+  },
+  "label_prompt": {
+    "message": "System-Prompt (Claude-Anweisungen):"
+  },
+  "placeholder_prompt": {
+    "message": "Du bist ein professioneller E-Mail-Assistent..."
+  },
+  "help_prompt": {
+    "message": "Leer lassen für Standard. Hier können Sie Claude spezifische Anweisungen geben."
+  },
+  "label_language": {
+    "message": "Antwortsprache:"
+  },
+  "button_reset": {
+    "message": "Zurücksetzen"
+  },
+  "button_save": {
+    "message": "Speichern"
+  },
+  "save_success": {
+    "message": "Einstellungen gespeichert!"
+  },
+  "save_error": {
+    "message": "Fehler beim Speichern der Einstellungen"
+  },
+  "api_key_required": {
+    "message": "Bitte geben Sie einen API-Schlüssel ein!"
+  },
+  "api_key_invalid": {
+    "message": "API-Schlüssel sollte mit 'sk-ant-' beginnen"
+  },
+  "reset_confirm": {
+    "message": "Wirklich alle Einstellungen zurücksetzen?"
+  },
+  "reset_success": {
+    "message": "Einstellungen zurückgesetzt"
   }
 }

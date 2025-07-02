@@ -33,7 +33,7 @@
     "message": "Email Original"
   },
   "section_response": {
-    "message": "Respuesta de Claude"
+    "message": "Configuración de Respuesta"
   },
   "section_chat": {
     "message": "Chatear con Claude"
@@ -117,5 +117,122 @@
   },
   "action_working": {
     "message": "Trabajando..."
+  },
+  "settings_title": {
+    "message": "Claude Asistente de Email"
+  },
+  "section_api": {
+    "message": "Configuración de API"
+  },
+  "label_api_key": {
+    "message": "Clave API de Claude:"
+  },
+  "placeholder_api_key": {
+    "message": "sk-ant-api03-..."
+  },
+  "help_api_key": {
+    "message": "Disponible en"
+  },
+  "label_model": {
+    "message": "Modelo Claude:"
+  },
+  "model_haiku": {
+    "message": "Claude 3.5 Haiku (Económico)"
+  },
+  "model_sonnet": {
+    "message": "Claude 3.5 Sonnet (Equilibrado)"
+  },
+  "model_opus": {
+    "message": "Claude 3 Opus (Premium)"
+  },
+  "model_haiku_desc": {
+    "message": "La opción más rápida y económica"
+  },
+  "model_sonnet_desc": {
+    "message": "Rendimiento y calidad equilibrados"
+  },
+  "model_opus_desc": {
+    "message": "Máxima calidad para respuestas complejas"
+  },
+  "label_length": {
+    "message": "Longitud de Respuesta:"
+  },
+  "help_length": {
+    "message": "200 = Corta, 1000 = Normal, 2000 = Detallada"
+  },
+  "label_style": {
+    "message": "Estilo de Respuesta Predeterminado:"
+  },
+  "style_professional": {
+    "message": "Profesional y Amigable"
+  },
+  "style_formal": {
+    "message": "Formal y Cortés"
+  },
+  "style_casual": {
+    "message": "Casual y Personal"
+  },
+  "style_concise": {
+    "message": "Breve y Preciso"
+  },
+  "section_personal": {
+    "message": "Configuración Personal"
+  },
+  "label_signature": {
+    "message": "Mi Firma:"
+  },
+  "placeholder_signature": {
+    "message": "Saludos cordiales,\\n\\nJuan Pérez\\nDesarrollador Senior\\njuan@ejemplo.com\\n+34 123 456 789"
+  },
+  "help_signature": {
+    "message": "Se añade automáticamente a cada respuesta"
+  },
+  "label_name": {
+    "message": "Mi Nombre (para saludo):"
+  },
+  "placeholder_name": {
+    "message": "Juan Pérez"
+  },
+  "help_name": {
+    "message": "Ayuda a Claude con el saludo adecuado"
+  },
+  "section_advanced": {
+    "message": "Configuración Avanzada"
+  },
+  "label_prompt": {
+    "message": "Prompt del Sistema (Instrucciones para Claude):"
+  },
+  "placeholder_prompt": {
+    "message": "Eres un asistente profesional de correo electrónico..."
+  },
+  "help_prompt": {
+    "message": "Dejar vacío para usar el predeterminado. Aquí puede dar instrucciones específicas a Claude."
+  },
+  "label_language": {
+    "message": "Idioma de Respuesta:"
+  },
+  "button_reset": {
+    "message": "Restablecer"
+  },
+  "button_save": {
+    "message": "Guardar"
+  },
+  "save_success": {
+    "message": "¡Configuración guardada!"
+  },
+  "save_error": {
+    "message": "Error al guardar la configuración"
+  },
+  "api_key_required": {
+    "message": "¡Por favor, introduzca una clave API!"
+  },
+  "api_key_invalid": {
+    "message": "La clave API debe comenzar con 'sk-ant-'"
+  },
+  "reset_confirm": {
+    "message": "¿Realmente desea restablecer toda la configuración?"
+  },
+  "reset_success": {
+    "message": "Configuración restablecida"
   }
 }

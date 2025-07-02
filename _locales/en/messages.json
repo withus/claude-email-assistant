@@ -33,7 +33,7 @@
     "message": "Original Email"
   },
   "section_response": {
-    "message": "Claude's Response"
+    "message": "Response Settings"
   },
   "section_chat": {
     "message": "Chat with Claude"
@@ -117,5 +117,122 @@
   },
   "action_working": {
     "message": "Working..."
+  },
+  "settings_title": {
+    "message": "Claude Email Assistant"
+  },
+  "section_api": {
+    "message": "API Configuration"
+  },
+  "label_api_key": {
+    "message": "Claude API Key:"
+  },
+  "placeholder_api_key": {
+    "message": "sk-ant-api03-..."
+  },
+  "help_api_key": {
+    "message": "Available at"
+  },
+  "label_model": {
+    "message": "Claude Model:"
+  },
+  "model_haiku": {
+    "message": "Claude 3.5 Haiku (Cost-Effective)"
+  },
+  "model_sonnet": {
+    "message": "Claude 3.5 Sonnet (Balanced)"
+  },
+  "model_opus": {
+    "message": "Claude 3 Opus (Premium)"
+  },
+  "model_haiku_desc": {
+    "message": "Fastest and most affordable option"
+  },
+  "model_sonnet_desc": {
+    "message": "Balanced performance and quality"
+  },
+  "model_opus_desc": {
+    "message": "Highest quality for complex responses"
+  },
+  "label_length": {
+    "message": "Response Length:"
+  },
+  "help_length": {
+    "message": "200 = Short, 1000 = Normal, 2000 = Detailed"
+  },
+  "label_style": {
+    "message": "Default Response Style:"
+  },
+  "style_professional": {
+    "message": "Professional & Friendly"
+  },
+  "style_formal": {
+    "message": "Formal & Polite"
+  },
+  "style_casual": {
+    "message": "Casual & Personal"
+  },
+  "style_concise": {
+    "message": "Short & Precise"
+  },
+  "section_personal": {
+    "message": "Personal Settings"
+  },
+  "label_signature": {
+    "message": "My Signature:"
+  },
+  "placeholder_signature": {
+    "message": "Best regards,\\n\\nJohn Doe\\nSenior Developer\\njohn@example.com\\n+1 234 567 8900"
+  },
+  "help_signature": {
+    "message": "Automatically added to every response"
+  },
+  "label_name": {
+    "message": "My Name (for salutation):"
+  },
+  "placeholder_name": {
+    "message": "John Doe"
+  },
+  "help_name": {
+    "message": "Helps Claude with proper addressing"
+  },
+  "section_advanced": {
+    "message": "Advanced Settings"
+  },
+  "label_prompt": {
+    "message": "System Prompt (Claude Instructions):"
+  },
+  "placeholder_prompt": {
+    "message": "You are a professional email assistant..."
+  },
+  "help_prompt": {
+    "message": "Leave empty for default. Here you can give Claude specific instructions."
+  },
+  "label_language": {
+    "message": "Response Language:"
+  },
+  "button_reset": {
+    "message": "Reset"
+  },
+  "button_save": {
+    "message": "Save"
+  },
+  "save_success": {
+    "message": "Settings saved!"
+  },
+  "save_error": {
+    "message": "Error saving settings"
+  },
+  "api_key_required": {
+    "message": "Please enter an API Key!"
+  },
+  "api_key_invalid": {
+    "message": "API Key should start with 'sk-ant-'"
+  },
+  "reset_confirm": {
+    "message": "Really reset all settings?"
+  },
+  "reset_success": {
+    "message": "Settings reset"
   }
 }

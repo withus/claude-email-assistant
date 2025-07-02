@@ -33,7 +33,7 @@
     "message": "原始邮件"
   },
   "section_response": {
-    "message": "Claude的回复"
+    "message": "回复设置"
   },
   "section_chat": {
     "message": "与Claude对话"
@@ -117,5 +117,122 @@
   },
   "action_working": {
     "message": "处理中..."
+  },
+  "settings_title": {
+    "message": "Claude 邮件助手"
+  },
+  "section_api": {
+    "message": "API 配置"
+  },
+  "label_api_key": {
+    "message": "Claude API 密钥："
+  },
+  "placeholder_api_key": {
+    "message": "sk-ant-api03-..."
+  },
+  "help_api_key": {
+    "message": "可在此获取"
+  },
+  "label_model": {
+    "message": "Claude 模型："
+  },
+  "model_haiku": {
+    "message": "Claude 3.5 Haiku（经济实惠）"
+  },
+  "model_sonnet": {
+    "message": "Claude 3.5 Sonnet（平衡）"
+  },
+  "model_opus": {
+    "message": "Claude 3 Opus（高级）"
+  },
+  "model_haiku_desc": {
+    "message": "最快速且最实惠的选择"
+  },
+  "model_sonnet_desc": {
+    "message": "性能和质量平衡"
+  },
+  "model_opus_desc": {
+    "message": "复杂回复的最高质量"
+  },
+  "label_length": {
+    "message": "回复长度："
+  },
+  "help_length": {
+    "message": "200 = 简短，1000 = 正常，2000 = 详细"
+  },
+  "label_style": {
+    "message": "默认回复风格："
+  },
+  "style_professional": {
+    "message": "专业友好"
+  },
+  "style_formal": {
+    "message": "正式礼貌"
+  },
+  "style_casual": {
+    "message": "随意个人"
+  },
+  "style_concise": {
+    "message": "简短精确"
+  },
+  "section_personal": {
+    "message": "个人设置"
+  },
+  "label_signature": {
+    "message": "我的签名："
+  },
+  "placeholder_signature": {
+    "message": "此致\\n敬礼\\n\\n张三\\n高级开发工程师\\nzhangsan@example.com\\n+86 123 4567 8900"
+  },
+  "help_signature": {
+    "message": "自动添加到每个回复"
+  },
+  "label_name": {
+    "message": "我的姓名（用于称呼）："
+  },
+  "placeholder_name": {
+    "message": "张三"
+  },
+  "help_name": {
+    "message": "帮助Claude正确称呼"
+  },
+  "section_advanced": {
+    "message": "高级设置"
+  },
+  "label_prompt": {
+    "message": "系统提示（Claude指令）："
+  },
+  "placeholder_prompt": {
+    "message": "你是一个专业的邮件助手..."
+  },
+  "help_prompt": {
+    "message": "留空使用默认值。在这里您可以给Claude具体的指令。"
+  },
+  "label_language": {
+    "message": "回复语言："
+  },
+  "button_reset": {
+    "message": "重置"
+  },
+  "button_save": {
+    "message": "保存"
+  },
+  "save_success": {
+    "message": "设置已保存！"
+  },
+  "save_error": {
+    "message": "保存设置时出错"
+  },
+  "api_key_required": {
+    "message": "请输入API密钥！"
+  },
+  "api_key_invalid": {
+    "message": "API密钥应以'sk-ant-'开头"
+  },
+  "reset_confirm": {
+    "message": "确定要重置所有设置吗？"
+  },
+  "reset_success": {
+    "message": "设置已重置"
   }
 }

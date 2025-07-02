@@ -227,93 +227,93 @@
 </head>
 <body>
   <div class="header">
-    <h1><img src="icon48.png" style="width: 24px; height: 24px; margin-right: 8px; vertical-align: middle;">Claude Email Assistant</h1>
+    <h1><img src="icon48.png" style="width: 24px; height: 24px; margin-right: 8px; vertical-align: middle;"><span data-i18n="settings_title">Claude Email Assistant</span></h1>
   </div>
   
   <div class="container">
     <!-- API Configuration -->
     <div class="section">
-      <h3 class="section-title">🔑 API Configuration</h3>
+      <h3 class="section-title">🔑 <span data-i18n="section_api">API Configuration</span></h3>
       
       <div class="form-group">
-        <label for="apiKey">Claude API Key:</label>
+        <label for="apiKey" data-i18n="label_api_key">Claude API Key:</label>
         <div class="input-wrapper">
-          <input type="password" id="apiKey" placeholder="sk-ant-api03-..." autocomplete="off">
+          <input type="password" id="apiKey" data-i18n-placeholder="placeholder_api_key" placeholder="sk-ant-api03-..." autocomplete="off">
           <button type="button" class="toggle-visibility" id="toggleApiKey">👁️</button>
         </div>
-        <div class="help-text">Available at <a href="https://console.anthropic.com/account/keys" target="_blank">console.anthropic.com</a></div>
+        <div class="help-text"><span data-i18n="help_api_key">Available at</span> <a href="https://console.anthropic.com/account/keys" target="_blank">console.anthropic.com</a></div>
       </div>
       
       <div class="form-group">
-        <label for="model">Claude Model:</label>
+        <label for="model" data-i18n="label_model">Claude Model:</label>
         <select id="model">
-          <option value="claude-3-5-haiku-20241022">Claude 3.5 Haiku (Cost-Effective)</option>
-          <option value="claude-3-5-sonnet-20241022">Claude 3.5 Sonnet (Balanced)</option>
-          <option value="claude-3-opus-20240229">Claude 3 Opus (Premium)</option>
+          <option value="claude-3-5-haiku-20241022" data-i18n="model_haiku">Claude 3.5 Haiku (Cost-Effective)</option>
+          <option value="claude-3-5-sonnet-20241022" data-i18n="model_sonnet">Claude 3.5 Sonnet (Balanced)</option>
+          <option value="claude-3-opus-20240229" data-i18n="model_opus">Claude 3 Opus (Premium)</option>
         </select>
-        <div class="model-info" id="modelInfo">Fastest and most affordable option</div>
+        <div class="model-info" id="modelInfo"><span data-i18n="model_haiku_desc">Fastest and most affordable option</span></div>
       </div>
     </div>
 
     <!-- Response Settings -->
     <div class="section">
-      <h3 class="section-title">📝 Response Settings</h3>
+      <h3 class="section-title">📝 <span data-i18n="section_response">Response Settings</span></h3>
       
       <div class="form-group">
-        <label for="maxTokens">Response Length:</label>
+        <label for="maxTokens" data-i18n="label_length">Response Length:</label>
         <div class="range-group">
           <input type="range" id="maxTokens" class="range-input" min="200" max="2000" step="100" value="1000">
           <span class="range-value" id="maxTokensValue">1000</span>
         </div>
-        <div class="help-text">200 = Short, 1000 = Normal, 2000 = Detailed</div>
+        <div class="help-text" data-i18n="help_length">200 = Short, 1000 = Normal, 2000 = Detailed</div>
       </div>
       
       <div class="form-group">
-        <label for="responseStyle">Default Response Style:</label>
+        <label for="responseStyle" data-i18n="label_style">Default Response Style:</label>
         <select id="responseStyle">
-          <option value="professional">Professional & Friendly</option>
-          <option value="formal">Formal & Polite</option>
-          <option value="casual">Casual & Personal</option>
-          <option value="concise">Short & Precise</option>
+          <option value="professional" data-i18n="style_professional">Professional & Friendly</option>
+          <option value="formal" data-i18n="style_formal">Formal & Polite</option>
+          <option value="casual" data-i18n="style_casual">Casual & Personal</option>
+          <option value="concise" data-i18n="style_concise">Short & Precise</option>
         </select>
       </div>
     </div>
 
     <!-- Personal Settings -->
     <div class="section">
-      <h3 class="section-title">👤 Personal Settings</h3>
+      <h3 class="section-title">👤 <span data-i18n="section_personal">Personal Settings</span></h3>
       
       <div class="form-group">
-        <label for="signature">My Signature:</label>
-        <textarea id="signature" class="signature-textarea" placeholder="Best regards,
+        <label for="signature" data-i18n="label_signature">My Signature:</label>
+        <textarea id="signature" class="signature-textarea" data-i18n-placeholder="placeholder_signature" placeholder="Best regards,
 
 John Doe
 Senior Developer
 john@example.com
 +1 234 567 8900"></textarea>
-        <div class="help-text">Automatically added to every response</div>
+        <div class="help-text" data-i18n="help_signature">Automatically added to every response</div>
         <div class="signature-preview" id="signaturePreview" style="display: none;"></div>
       </div>
       
       <div class="form-group">
-        <label for="defaultSender">My Name (for salutation):</label>
-        <input type="text" id="defaultSender" placeholder="John Doe">
-        <div class="help-text">Helps Claude with proper addressing</div>
+        <label for="defaultSender" data-i18n="label_name">My Name (for salutation):</label>
+        <input type="text" id="defaultSender" data-i18n-placeholder="placeholder_name" placeholder="John Doe">
+        <div class="help-text" data-i18n="help_name">Helps Claude with proper addressing</div>
       </div>
     </div>
 
     <!-- Advanced -->
     <div class="section">
-      <h3 class="section-title">⚙️ Advanced Settings</h3>
+      <h3 class="section-title">⚙️ <span data-i18n="section_advanced">Advanced Settings</span></h3>
       
       <div class="form-group">
-        <label for="customPrompt">System Prompt (Claude Instructions):</label>
-        <textarea id="customPrompt" class="prompt-textarea" placeholder="You are a professional email assistant..."></textarea>
-        <div class="help-text">Leave empty for default. Here you can give Claude specific instructions.</div>
+        <label for="customPrompt" data-i18n="label_prompt">System Prompt (Claude Instructions):</label>
+        <textarea id="customPrompt" class="prompt-textarea" data-i18n-placeholder="placeholder_prompt" placeholder="You are a professional email assistant..."></textarea>
+        <div class="help-text" data-i18n="help_prompt">Leave empty for default. Here you can give Claude specific instructions.</div>
       </div>
       
       <div class="form-group">
-        <label for="language">Response Language:</label>
+        <label for="language" data-i18n="label_language">Response Language:</label>
         <select id="language">
           <option value="en">English</option>
           <option value="es">Español (Spanish)</option>
@@ -327,8 +327,8 @@ john@example.com
     </div>
 
     <div class="buttons">
-      <button type="button" class="btn-secondary" id="resetButton">Reset</button>
-      <button type="button" class="btn-primary" id="saveButton">Save</button>
+      <button type="button" class="btn-secondary" id="resetButton" data-i18n="button_reset">Reset</button>
+      <button type="button" class="btn-primary" id="saveButton" data-i18n="button_save">Save</button>
     </div>
     
     <div id="status" class="status"></div>

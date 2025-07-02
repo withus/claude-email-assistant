@@ -12,14 +12,45 @@ const DEFAULT_SETTINGS = {
   language: 'en'
 };
 
-// Model Info
-const MODEL_INFO = {
-  'claude-3-5-haiku-20241022': 'Fastest and most affordable option',
-  'claude-3-5-sonnet-20241022': 'Balanced: Speed and quality',
-  'claude-3-opus-20240229': 'Highest quality for complex responses'
-};
+// Translate all UI elements
+function translateUI() {
+  // Translate elements with data-i18n attribute
+  document.querySelectorAll('[data-i18n]').forEach(element => {
+    const key = element.getAttribute('data-i18n');
+    element.textContent = chrome.i18n.getMessage(key);
+  });
+  
+  // Translate placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+    const key = element.getAttribute('data-i18n-placeholder');
+    element.placeholder = chrome.i18n.getMessage(key);
+  });
+  
+  // Update model info with proper translation
+  updateModelInfo();
+}
+
+// Update model info based on selected model
+function updateModelInfo() {
+  const modelSelect = document.getElementById('model');
+  const modelInfo = document.getElementById('modelInfo');
+  const selectedModel = modelSelect.value;
+  
+  // Map model values to i18n keys
+  const modelInfoMap = {
+    'claude-3-5-haiku-20241022': 'model_haiku_desc',
+    'claude-3-5-sonnet-20241022': 'model_sonnet_desc',
+    'claude-3-opus-20240229': 'model_opus_desc'
+  };
+  
+  const infoKey = modelInfoMap[selectedModel];
+  if (infoKey) {
+    modelInfo.innerHTML = `<span data-i18n="${infoKey}">${chrome.i18n.getMessage(infoKey)}</span>`;
+  }
+}
 
 document.addEventListener('DOMContentLoaded', async () => {
+  translateUI();
   await loadSettings();
   setupEventListeners();
 });
@@ -41,9 +72,8 @@ function setupEventListeners() {
   });
 
   // Model Info Update
-  document.getElementById('model').addEventListener('change', (e) => {
-    const info = MODEL_INFO[e.target.value];
-    document.getElementById('modelInfo').textContent = info;
+  document.getElementById('model').addEventListener('change', () => {
+    updateModelInfo();
   });
 
   // Max Tokens Slider
@@ -77,6 +107,17 @@ function setupEventListeners() {
       saveSettings();
     }
   });
+
+  // Language change listener
+  document.getElementById('language').addEventListener('change', async (e) => {
+    // Save the language immediately when changed
+    const currentSettings = await getCurrentSettings();
+    currentSettings.language = e.target.value;
+    await chrome.storage.sync.set({ language: e.target.value });
+    
+    // Reload the page to apply new language
+    window.location.reload();
+  });
 }
 
 // Load Settings
@@ -97,8 +138,7 @@ async function loadSettings() {
     document.getElementById('language').value = settings.language;
     
     // Update model info
-    const modelInfo = MODEL_INFO[settings.model];
-    document.getElementById('modelInfo').textContent = modelInfo;
+    updateModelInfo();
     
     // Update signature preview
     const signatureInput = document.getElementById('signature');
@@ -110,7 +150,7 @@ async function loadSettings() {
     
   } catch (error) {
     console.error('Error loading settings:', error);
-    showStatus('Error loading settings', 'error');
+    showStatus(chrome.i18n.getMessage('save_error'), 'error');
   }
 }
 
@@ -121,12 +161,12 @@ async function saveSettings() {
     
     // Validate API Key
     if (!apiKey) {
-      showStatus('Please enter an API Key!', 'error');
+      showStatus(chrome.i18n.getMessage('api_key_required'), 'error');
       return;
     }
     
     if (!apiKey.startsWith('sk-ant-')) {
-      showStatus('API Key should start with "sk-ant-"', 'error');
+      showStatus(chrome.i18n.getMessage('api_key_invalid'), 'error');
       return;
     }
     
@@ -148,23 +188,23 @@ async function saveSettings() {
     // For backward compatibility, also save claudeApiKey
     await chrome.storage.sync.set({ claudeApiKey: apiKey });
     
-    showStatus('✅ Settings saved!', 'success');
+    showStatus(chrome.i18n.getMessage('save_success'), 'success');
     
   } catch (error) {
     console.error('Error saving settings:', error);
-    showStatus('Error saving: ' + error.message, 'error');
+    showStatus(chrome.i18n.getMessage('save_error') + ': ' + error.message, 'error');
   }
 }
 
 // Reset Settings
 async function resetSettings() {
-  if (confirm('Really reset all settings?')) {
+  if (confirm(chrome.i18n.getMessage('reset_confirm'))) {
     try {
       await chrome.storage.sync.clear();
       await loadSettings();
-      showStatus('Settings reset', 'success');
+      showStatus(chrome.i18n.getMessage('reset_success'), 'success');
     } catch (error) {
-      showStatus('Error resetting: ' + error.message, 'error');
+      showStatus(chrome.i18n.getMessage('save_error') + ': ' + error.message, 'error');
     }
   }
 }
