@@ -285,14 +285,25 @@
       
       <div class="form-group">
         <label for="signature" data-i18n="label_signature">My Signature:</label>
+        <div style="display: flex; gap: 8px; margin-bottom: 4px;">
+          <button type="button" class="html-btn" id="toggleHtmlMode" style="padding: 4px 8px; font-size: 11px; background: #e5e7eb; border: none; border-radius: 4px; cursor: pointer;">
+            <span data-i18n="toggle_html">HTML Mode</span>
+          </button>
+          <button type="button" class="html-btn" onclick="document.getElementById('signature').value += '<br>'" style="padding: 4px 8px; font-size: 11px; background: #e5e7eb; border: none; border-radius: 4px; cursor: pointer;">BR</button>
+          <button type="button" class="html-btn" onclick="document.getElementById('signature').value += '<b></b>'" style="padding: 4px 8px; font-size: 11px; background: #e5e7eb; border: none; border-radius: 4px; cursor: pointer;">B</button>
+          <button type="button" class="html-btn" onclick="document.getElementById('signature').value += '<a href=\"\"></a>'" style="padding: 4px 8px; font-size: 11px; background: #e5e7eb; border: none; border-radius: 4px; cursor: pointer;">Link</button>
+        </div>
         <textarea id="signature" class="signature-textarea" data-i18n-placeholder="placeholder_signature" placeholder="Best regards,
 
 John Doe
 Senior Developer
 john@example.com
 +1 234 567 8900"></textarea>
-        <div class="help-text" data-i18n="help_signature">Automatically added to every response</div>
-        <div class="signature-preview" id="signaturePreview" style="display: none;"></div>
+        <div class="help-text"><span data-i18n="help_signature">Automatically added to every response</span> <span data-i18n="help_signature_html">(HTML supported)</span></div>
+        <div style="margin-top: 8px;">
+          <label style="font-size: 12px; color: #6b7280;"><span data-i18n="preview_label">Preview:</span></label>
+          <div class="signature-preview" id="signaturePreview" style="display: block; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 4px; padding: 12px; margin-top: 4px; min-height: 50px;"></div>
+        </div>
       </div>
       
       <div class="form-group">

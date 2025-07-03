@@ -118,6 +118,33 @@
   "action_working": {
     "message": "Arbeite..."
   },
+  "button_compose": {
+    "message": "Claude Verfassen"
+  },
+  "modal_title_compose": {
+    "message": "Claude E-Mail verfassen"
+  },
+  "section_compose": {
+    "message": "E-Mail verfassen"
+  },
+  "compose_placeholder": {
+    "message": "Ihre E-Mail erscheint hier..."
+  },
+  "compose_chat_placeholder": {
+    "message": "Sagen Sie Claude, welche E-Mail geschrieben werden soll (z.B. 'Schreibe eine professionelle E-Mail an John über die Projektfrist')"
+  },
+  "toggle_html": {
+    "message": "HTML-Modus"
+  },
+  "help_signature_html": {
+    "message": "(HTML unterstützt)"
+  },
+  "preview_label": {
+    "message": "Vorschau:"
+  },
+  "no_signature_preview": {
+    "message": "Keine Signatur gesetzt"
+  },
   "settings_title": {
     "message": "Claude E-Mail Assistent"
   },

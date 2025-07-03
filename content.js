@@ -7,8 +7,11 @@ cssLink.rel = 'stylesheet';
 cssLink.href = chrome.runtime.getURL('modal.css');
 document.head.appendChild(cssLink);
 
-// Add Claude button to each email
+// Add Claude button to each email and compose button
 function addClaudeButtons() {
+  // Add compose button near Gmail's compose button
+  addComposeButton();
+  
   // Finde alle Email Container
   const emails = document.querySelectorAll('[role="listitem"]');
   
@@ -32,6 +35,69 @@ function addClaudeButtons() {
       actionBar.appendChild(claudeBtn);
     }
   });
+}
+
+// Add compose button near Gmail's compose button
+function addComposeButton() {
+  // Skip if already exists
+  if (document.querySelector('.claude-compose-btn')) return;
+  
+  // Find Gmail's compose button
+  const composeSelectors = [
+    '.T-I.T-I-KE.L3', // Standard compose button
+    '[gh="cm"]', // Compose button container
+    '.z0 > .L3', // Alternative compose button
+    '.aic .z0 > div[role="button"]' // Another variation
+  ];
+  
+  let gmailComposeBtn = null;
+  for (const selector of composeSelectors) {
+    gmailComposeBtn = document.querySelector(selector);
+    if (gmailComposeBtn) break;
+  }
+  
+  if (!gmailComposeBtn) return;
+  
+  // Create Claude compose button
+  const claudeComposeBtn = document.createElement('div');
+  claudeComposeBtn.className = 'claude-compose-btn T-I T-I-KE L3';
+  claudeComposeBtn.setAttribute('role', 'button');
+  claudeComposeBtn.style.cssText = `
+    margin-left: 8px;
+    background: linear-gradient(135deg, #7B5FB2 0%, #4A90E2 100%);
+    color: white;
+    border-radius: 4px;
+    padding: 0 24px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    height: 48px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 1px 2px 0 rgba(60,64,67,0.302), 0 1px 3px 1px rgba(60,64,67,0.149);
+  `;
+  
+  // Create icon and text
+  const icon = document.createElement('img');
+  icon.src = chrome.runtime.getURL('icon24.png');
+  icon.style.cssText = 'width: 24px; height: 24px; margin-right: 8px;';
+  
+  claudeComposeBtn.appendChild(icon);
+  claudeComposeBtn.appendChild(document.createTextNode(chrome.i18n.getMessage('button_compose') || 'Claude Compose'));
+  
+  // Hover effect
+  claudeComposeBtn.addEventListener('mouseenter', () => {
+    claudeComposeBtn.style.background = 'linear-gradient(135deg, #6B4FA2 0%, #3A80D2 100%)';
+  });
+  claudeComposeBtn.addEventListener('mouseleave', () => {
+    claudeComposeBtn.style.background = 'linear-gradient(135deg, #7B5FB2 0%, #4A90E2 100%)';
+  });
+  
+  // Click handler
+  claudeComposeBtn.addEventListener('click', handleClaudeCompose);
+  
+  // Insert after Gmail's compose button
+  gmailComposeBtn.parentElement.appendChild(claudeComposeBtn);
 }
 
 // Creates the Claude button
@@ -220,6 +286,30 @@ function extractEmailContent(emailElement) {
 
 // Global state for current conversation
 let currentConversation = null;
+let isComposeMode = false;
+
+// Handle Claude Compose button click
+async function handleClaudeCompose() {
+  try {
+    isComposeMode = true;
+    
+    // Create empty email data for compose mode
+    const emailData = {
+      subject: '',
+      sender: '',
+      content: '',
+      timestamp: new Date().toLocaleString(),
+      isCompose: true
+    };
+    
+    // Open modal in compose mode with empty reply
+    await openPreviewModal(emailData, '');
+    
+  } catch (error) {
+    console.error('Claude Email Assistant Compose Error:', error);
+    alert(chrome.i18n.getMessage('error_generic') + ': ' + error.message);
+  }
+}
 
 // Preview Modal Functions
 async function openPreviewModal(emailData, initialReply) {
@@ -243,16 +333,26 @@ function createPreviewModal(emailData, reply) {
   
   // Get localized strings
   const i18n = chrome.i18n;
-  const wordCount = reply.split(' ').length;
+  const wordCount = reply ? reply.split(' ').filter(w => w).length : 0;
+  const isCompose = emailData.isCompose || false;
+  
+  // Different title for compose mode
+  const modalTitle = isCompose ? 
+    (i18n.getMessage('modal_title_compose') || 'Claude Compose Email') : 
+    i18n.getMessage('modal_title');
   
   modal.innerHTML = `
     <div class="claude-modal-content">
       <div class="claude-modal-header">
-        <h2 class="claude-modal-title">🤖 ${i18n.getMessage('modal_title')}</h2>
+        <h2 class="claude-modal-title">
+          <img src="${chrome.runtime.getURL('icon24.png')}" style="width: 24px; height: 24px; margin-right: 8px; vertical-align: middle;">
+          ${modalTitle}
+        </h2>
         <button class="claude-modal-close">&times;</button>
       </div>
       
       <div class="claude-modal-body">
+        ${!isCompose ? `
         <!-- Original Email -->
         <div class="claude-section">
           <h3 class="claude-section-title">📧 ${i18n.getMessage('section_original')}</h3>
@@ -265,12 +365,14 @@ function createPreviewModal(emailData, reply) {
             <div class="claude-email-content">${emailData.content || i18n.getMessage('no_content')}</div>
           </div>
         </div>
+        ` : ''}
         
         <!-- Response Editor -->
         <div class="claude-section">
-          <h3 class="claude-section-title">✍️ ${i18n.getMessage('section_response')}</h3>
+          <h3 class="claude-section-title">✍️ ${isCompose ? (i18n.getMessage('section_compose') || 'Compose Email') : i18n.getMessage('section_response')}</h3>
           <div class="claude-response-editor">
-            <textarea class="claude-response-textarea" placeholder="Response loading...">${reply}</textarea>
+            <textarea class="claude-response-textarea" 
+              placeholder="${isCompose ? (i18n.getMessage('compose_placeholder') || 'Your email will appear here...') : 'Response loading...'}">${reply}</textarea>
             <div class="claude-word-count">${i18n.getMessage('word_count', [wordCount.toString()])}</div>
           </div>
         </div>
@@ -284,7 +386,7 @@ function createPreviewModal(emailData, reply) {
             </div>
             <div class="claude-chat-input-container">
               <textarea class="claude-chat-input" id="claude-chat-input" 
-                placeholder="${i18n.getMessage('chat_placeholder')}" 
+                placeholder="${isCompose ? (i18n.getMessage('compose_chat_placeholder') || 'Tell Claude what email to write (e.g., "Write a professional email to John about the project deadline")') : i18n.getMessage('chat_placeholder')}" 
                 rows="1"></textarea>
               <button class="claude-chat-send" id="claude-chat-send">${i18n.getMessage('chat_send')}</button>
             </div>
@@ -550,24 +652,40 @@ function showToast(message, type = 'info') {
 class ClaudeConversation {
   constructor(emailData, initialReply) {
     this.emailData = emailData;
-    this.messages = [
-      {
-        role: 'user',
-        content: `Original Email from ${emailData.sender}:\nSubject: ${emailData.subject}\n\n${emailData.content}`
-      },
-      {
-        role: 'assistant',
-        content: initialReply
-      }
-    ];
+    this.isCompose = emailData.isCompose || false;
+    
+    if (this.isCompose) {
+      // For compose mode, start with empty messages
+      this.messages = [];
+    } else {
+      // For reply mode, include the original email
+      this.messages = [
+        {
+          role: 'user',
+          content: `Original Email from ${emailData.sender}:\nSubject: ${emailData.subject}\n\n${emailData.content}`
+        },
+        {
+          role: 'assistant',
+          content: initialReply
+        }
+      ];
+    }
   }
   
   async requestChange(changeRequest) {
-    // Add user's change request
-    this.messages.push({
-      role: 'user',
-      content: `Change the previous response: ${changeRequest}`
-    });
+    if (this.isCompose && this.messages.length === 0) {
+      // First message in compose mode - direct email request
+      this.messages.push({
+        role: 'user',
+        content: changeRequest
+      });
+    } else {
+      // Add user's change request for existing conversation
+      this.messages.push({
+        role: 'user',
+        content: this.isCompose ? changeRequest : `Change the previous response: ${changeRequest}`
+      });
+    }
     
     try {
       // Get settings for system prompt
@@ -592,7 +710,7 @@ class ClaudeConversation {
       settings.apiKey = apiKey;
       
       // Call Claude with conversation context
-      const systemPrompt = settings.customPrompt || await getDefaultSystemPrompt(settings);
+      const systemPrompt = settings.customPrompt || await getDefaultSystemPrompt(settings, this.isCompose);
       
       const newReply = await callClaudeWithContext(this.messages, systemPrompt, settings);
       
@@ -666,7 +784,7 @@ async function getSettings() {
 }
 
 // Generate default system prompt based on settings
-async function getDefaultSystemPrompt(settings) {
+async function getDefaultSystemPrompt(settings, isCompose = false) {
   const styleInstructions = {
     professional: 'polite, professional and friendly',
     formal: 'very formal and respectful',
@@ -685,7 +803,16 @@ async function getDefaultSystemPrompt(settings) {
   };
   const language = languageMap[settings.language] || 'the same language as the original email';
   
-  let prompt = `You are a professional email assistant. Write responses that are ${style}.
+  let prompt = isCompose ? 
+    `You are a professional email assistant. Write complete emails that are ${style}.
+
+Important instructions:
+- Write in ${language}
+- Write a complete email based on the user's request
+- Include an appropriate subject line if requested
+- Use appropriate salutation and closing based on context
+- Make the email ready to send` :
+    `You are a professional email assistant. Write responses that are ${style}.
 
 Important instructions:
 - Respond in ${language}

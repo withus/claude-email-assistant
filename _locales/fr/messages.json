@@ -234,5 +234,32 @@
   },
   "reset_success": {
     "message": "Paramètres réinitialisés"
+  },
+  "button_compose": {
+    "message": "Claude Composer"
+  },
+  "modal_title_compose": {
+    "message": "Claude Composer Email"
+  },
+  "section_compose": {
+    "message": "Composer Email"
+  },
+  "compose_placeholder": {
+    "message": "Votre email apparaîtra ici..."
+  },
+  "compose_chat_placeholder": {
+    "message": "Dites à Claude quel email écrire (ex: 'Écris un email professionnel à Jean sur la date limite du projet')"
+  },
+  "toggle_html": {
+    "message": "Mode HTML"
+  },
+  "help_signature_html": {
+    "message": "(HTML supporté)"
+  },
+  "preview_label": {
+    "message": "Aperçu :"
+  },
+  "no_signature_preview": {
+    "message": "Aucune signature définie"
   }
 }

@@ -234,5 +234,32 @@
   },
   "reset_success": {
     "message": "设置已重置"
+  },
+  "button_compose": {
+    "message": "Claude 撰写"
+  },
+  "modal_title_compose": {
+    "message": "Claude 撰写邮件"
+  },
+  "section_compose": {
+    "message": "撰写邮件"
+  },
+  "compose_placeholder": {
+    "message": "您的邮件将显示在这里..."
+  },
+  "compose_chat_placeholder": {
+    "message": "告诉Claude要写什么邮件（例如：'给John写一封关于项目截止日期的专业邮件'）"
+  },
+  "toggle_html": {
+    "message": "HTML模式"
+  },
+  "help_signature_html": {
+    "message": "（支持HTML）"
+  },
+  "preview_label": {
+    "message": "预览："
+  },
+  "no_signature_preview": {
+    "message": "未设置签名"
   }
 }

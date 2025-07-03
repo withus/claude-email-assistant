@@ -49,6 +49,27 @@ function updateModelInfo() {
   }
 }
 
+// Global variables
+let isHtmlMode = false;
+
+// Update signature preview function
+function updateSignaturePreview() {
+  const signatureInput = document.getElementById('signature');
+  const signaturePreview = document.getElementById('signaturePreview');
+  const value = signatureInput.value.trim();
+  
+  if (value) {
+    // Convert newlines to <br> if not in HTML mode
+    let displayValue = value;
+    if (!isHtmlMode && !value.includes('<')) {
+      displayValue = value.replace(/\n/g, '<br>');
+    }
+    signaturePreview.innerHTML = displayValue;
+  } else {
+    signaturePreview.innerHTML = '<span style="color: #9ca3af;">' + (chrome.i18n.getMessage('no_signature_preview') || 'No signature set') + '</span>';
+  }
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   translateUI();
   await loadSettings();
@@ -84,15 +105,16 @@ function setupEventListeners() {
     maxTokensValue.textContent = e.target.value;
   });
 
-  // Signature Preview
-  document.getElementById('signature').addEventListener('input', (e) => {
-    const preview = document.getElementById('signaturePreview');
-    if (e.target.value.trim()) {
-      preview.textContent = e.target.value;
-      preview.style.display = 'block';
-    } else {
-      preview.style.display = 'none';
-    }
+  // Signature Preview with HTML support
+  const signatureInput = document.getElementById('signature');
+  signatureInput.addEventListener('input', updateSignaturePreview);
+  
+  // HTML mode toggle
+  document.getElementById('toggleHtmlMode').addEventListener('click', (e) => {
+    isHtmlMode = !isHtmlMode;
+    e.target.style.background = isHtmlMode ? 'linear-gradient(135deg, #7B5FB2 0%, #4A90E2 100%)' : '#e5e7eb';
+    e.target.style.color = isHtmlMode ? 'white' : '#374151';
+    updateSignaturePreview();
   });
 
   // Save Button
@@ -141,12 +163,7 @@ async function loadSettings() {
     updateModelInfo();
     
     // Update signature preview
-    const signatureInput = document.getElementById('signature');
-    if (signatureInput.value.trim()) {
-      const preview = document.getElementById('signaturePreview');
-      preview.textContent = signatureInput.value;
-      preview.style.display = 'block';
-    }
+    updateSignaturePreview();
     
   } catch (error) {
     console.error('Error loading settings:', error);

@@ -118,6 +118,33 @@
   "action_working": {
     "message": "Working..."
   },
+  "button_compose": {
+    "message": "Claude Compose"
+  },
+  "modal_title_compose": {
+    "message": "Claude Compose Email"
+  },
+  "section_compose": {
+    "message": "Compose Email"
+  },
+  "compose_placeholder": {
+    "message": "Your email will appear here..."
+  },
+  "compose_chat_placeholder": {
+    "message": "Tell Claude what email to write (e.g., 'Write a professional email to John about the project deadline')"
+  },
+  "toggle_html": {
+    "message": "HTML Mode"
+  },
+  "help_signature_html": {
+    "message": "(HTML supported)"
+  },
+  "preview_label": {
+    "message": "Preview:"
+  },
+  "no_signature_preview": {
+    "message": "No signature set"
+  },
   "settings_title": {
     "message": "Claude Email Assistant"
   },

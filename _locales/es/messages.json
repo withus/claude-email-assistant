@@ -118,6 +118,33 @@
   "action_working": {
     "message": "Trabajando..."
   },
+  "button_compose": {
+    "message": "Claude Redactar"
+  },
+  "modal_title_compose": {
+    "message": "Claude Redactar Email"
+  },
+  "section_compose": {
+    "message": "Redactar Email"
+  },
+  "compose_placeholder": {
+    "message": "Tu email aparecerá aquí..."
+  },
+  "compose_chat_placeholder": {
+    "message": "Dile a Claude qué email escribir (ej: 'Escribe un email profesional a Juan sobre la fecha límite del proyecto')"
+  },
+  "toggle_html": {
+    "message": "Modo HTML"
+  },
+  "help_signature_html": {
+    "message": "(HTML soportado)"
+  },
+  "preview_label": {
+    "message": "Vista previa:"
+  },
+  "no_signature_preview": {
+    "message": "Sin firma configurada"
+  },
   "settings_title": {
     "message": "Claude Asistente de Email"
   },
