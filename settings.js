@@ -6,10 +6,19 @@ const DEFAULT_SETTINGS = {
   model: 'claude-3-5-haiku-20241022',
   maxTokens: 1000,
   responseStyle: 'professional',
-  signature: '',
+  signature: '', // Legacy single signature
+  signatures: [], // New: Array of signature objects
   defaultSender: '',
   customPrompt: '',
   language: 'en'
+};
+
+// Default signature structure
+const DEFAULT_SIGNATURE = {
+  id: Date.now(),
+  title: '',
+  content: '',
+  isHtml: false
 };
 
 // Translate all UI elements
@@ -50,25 +59,172 @@ function updateModelInfo() {
 }
 
 // Global variables
-let isHtmlMode = false;
+let signatures = [];
+let nextSignatureId = 1;
 
-// Update signature preview function
-function updateSignaturePreview() {
-  const signatureInput = document.getElementById('signature');
-  const signaturePreview = document.getElementById('signaturePreview');
-  const value = signatureInput.value.trim();
+// Render all signatures
+function renderSignatures() {
+  const container = document.getElementById('signaturesContainer');
+  container.innerHTML = '';
   
-  if (value) {
-    // Convert newlines to <br> if not in HTML mode
-    let displayValue = value;
-    if (!isHtmlMode && !value.includes('<')) {
-      displayValue = value.replace(/\n/g, '<br>');
+  if (signatures.length === 0) {
+    // Add a default signature if none exist
+    addNewSignature();
+    return;
+  }
+  
+  signatures.forEach((sig, index) => {
+    const sigDiv = createSignatureElement(sig, index);
+    container.appendChild(sigDiv);
+  });
+}
+
+// Create signature element
+function createSignatureElement(signature, index) {
+  const div = document.createElement('div');
+  div.className = 'signature-item';
+  div.dataset.signatureId = signature.id;
+  
+  div.innerHTML = `
+    <div class="signature-header">
+      <input type="text" class="signature-title-input" 
+        value="${signature.title || chrome.i18n.getMessage('signature_default_title') || 'Signature ' + (index + 1)}" 
+        placeholder="${chrome.i18n.getMessage('signature_title_placeholder') || 'Signature name...'}">
+      <div class="signature-actions">
+        <button type="button" class="signature-btn html-toggle" data-html="${signature.isHtml || false}">
+          ${chrome.i18n.getMessage('toggle_html') || 'HTML'}
+        </button>
+        <button type="button" class="signature-btn" onclick="insertHtmlTag(this, '<br>')" ${!signature.isHtml ? 'style="display:none;"' : ''}>BR</button>
+        <button type="button" class="signature-btn" onclick="insertHtmlTag(this, '<b></b>')" ${!signature.isHtml ? 'style="display:none;"' : ''}>B</button>
+        <button type="button" class="signature-btn" onclick="insertHtmlTag(this, '<a href=\"\"></a>')" ${!signature.isHtml ? 'style="display:none;"' : ''}>Link</button>
+        <button type="button" class="signature-btn delete">
+          ${chrome.i18n.getMessage('delete') || 'Delete'}
+        </button>
+      </div>
+    </div>
+    <textarea class="signature-textarea" placeholder="${chrome.i18n.getMessage('placeholder_signature')}">${signature.content || ''}</textarea>
+    <div class="signature-preview-small"></div>
+  `;
+  
+  // Setup event listeners for this signature
+  setupSignatureEventListeners(div, signature);
+  
+  // Update preview
+  updateSingleSignaturePreview(div, signature);
+  
+  return div;
+}
+
+// Setup event listeners for a signature element
+function setupSignatureEventListeners(element, signature) {
+  const titleInput = element.querySelector('.signature-title-input');
+  const textarea = element.querySelector('.signature-textarea');
+  const htmlToggle = element.querySelector('.html-toggle');
+  const deleteBtn = element.querySelector('.delete');
+  const htmlButtons = element.querySelectorAll('.signature-btn:not(.html-toggle):not(.delete)');
+  
+  // Title change
+  titleInput.addEventListener('input', (e) => {
+    signature.title = e.target.value;
+  });
+  
+  // Content change
+  textarea.addEventListener('input', (e) => {
+    signature.content = e.target.value;
+    updateSingleSignaturePreview(element, signature);
+  });
+  
+  // HTML toggle
+  htmlToggle.addEventListener('click', () => {
+    signature.isHtml = !signature.isHtml;
+    htmlToggle.dataset.html = signature.isHtml;
+    htmlToggle.style.background = signature.isHtml ? 'linear-gradient(135deg, #7B5FB2 0%, #4A90E2 100%)' : '#e5e7eb';
+    htmlToggle.style.color = signature.isHtml ? 'white' : '#374151';
+    
+    // Show/hide HTML buttons
+    htmlButtons.forEach(btn => {
+      btn.style.display = signature.isHtml ? 'block' : 'none';
+    });
+    
+    updateSingleSignaturePreview(element, signature);
+  });
+  
+  // Initialize HTML toggle state
+  if (signature.isHtml) {
+    htmlToggle.style.background = 'linear-gradient(135deg, #7B5FB2 0%, #4A90E2 100%)';
+    htmlToggle.style.color = 'white';
+  }
+  
+  // Delete button
+  deleteBtn.addEventListener('click', () => {
+    if (signatures.length > 1) {
+      signatures = signatures.filter(s => s.id !== signature.id);
+      renderSignatures();
+    } else {
+      alert(chrome.i18n.getMessage('cannot_delete_last_signature') || 'Cannot delete the last signature');
     }
-    signaturePreview.innerHTML = displayValue;
+  });
+}
+
+// Update preview for a single signature
+function updateSingleSignaturePreview(element, signature) {
+  const preview = element.querySelector('.signature-preview-small');
+  const content = signature.content || '';
+  
+  if (content.trim()) {
+    let displayValue = content;
+    if (!signature.isHtml && !content.includes('<')) {
+      displayValue = content.replace(/\n/g, '<br>');
+    }
+    preview.innerHTML = displayValue;
   } else {
-    signaturePreview.innerHTML = '<span style="color: #9ca3af;">' + (chrome.i18n.getMessage('no_signature_preview') || 'No signature set') + '</span>';
+    preview.innerHTML = '<span style="color: #9ca3af;">' + (chrome.i18n.getMessage('no_signature_preview') || 'No signature set') + '</span>';
   }
 }
+
+// Add new signature
+function addNewSignature() {
+  const newSignature = {
+    id: nextSignatureId++,
+    title: chrome.i18n.getMessage('signature_default_title') || 'Signature ' + (signatures.length + 1),
+    content: '',
+    isHtml: false
+  };
+  
+  signatures.push(newSignature);
+  renderSignatures();
+  
+  // Focus on the new signature's title
+  setTimeout(() => {
+    const newElement = document.querySelector(`[data-signature-id="${newSignature.id}"] .signature-title-input`);
+    if (newElement) {
+      newElement.focus();
+      newElement.select();
+    }
+  }, 100);
+}
+
+// Insert HTML tag helper
+window.insertHtmlTag = function(button, tag) {
+  const signatureItem = button.closest('.signature-item');
+  const textarea = signatureItem.querySelector('.signature-textarea');
+  const start = textarea.selectionStart;
+  const end = textarea.selectionEnd;
+  const text = textarea.value;
+  
+  textarea.value = text.substring(0, start) + tag + text.substring(end);
+  
+  // Position cursor inside the tag
+  if (tag.includes('><')) {
+    const cursorPos = start + tag.indexOf('><') + 1;
+    textarea.setSelectionRange(cursorPos, cursorPos);
+  } else {
+    textarea.setSelectionRange(start + tag.length, start + tag.length);
+  }
+  
+  textarea.focus();
+  textarea.dispatchEvent(new Event('input'));
+};
 
 document.addEventListener('DOMContentLoaded', async () => {
   translateUI();
@@ -105,17 +261,11 @@ function setupEventListeners() {
     maxTokensValue.textContent = e.target.value;
   });
 
-  // Signature Preview with HTML support
-  const signatureInput = document.getElementById('signature');
-  signatureInput.addEventListener('input', updateSignaturePreview);
+  // Add signature button
+  document.getElementById('addSignature').addEventListener('click', addNewSignature);
   
-  // HTML mode toggle
-  document.getElementById('toggleHtmlMode').addEventListener('click', (e) => {
-    isHtmlMode = !isHtmlMode;
-    e.target.style.background = isHtmlMode ? 'linear-gradient(135deg, #7B5FB2 0%, #4A90E2 100%)' : '#e5e7eb';
-    e.target.style.color = isHtmlMode ? 'white' : '#374151';
-    updateSignaturePreview();
-  });
+  // Initialize signatures display
+  renderSignatures();
 
   // Save Button
   document.getElementById('saveButton').addEventListener('click', saveSettings);
@@ -154,7 +304,6 @@ async function loadSettings() {
     document.getElementById('maxTokens').value = settings.maxTokens;
     document.getElementById('maxTokensValue').textContent = settings.maxTokens;
     document.getElementById('responseStyle').value = settings.responseStyle;
-    document.getElementById('signature').value = settings.signature || '';
     document.getElementById('defaultSender').value = settings.defaultSender || '';
     document.getElementById('customPrompt').value = settings.customPrompt || '';
     document.getElementById('language').value = settings.language;
@@ -162,8 +311,27 @@ async function loadSettings() {
     // Update model info
     updateModelInfo();
     
-    // Update signature preview
-    updateSignaturePreview();
+    // Load signatures
+    if (settings.signatures && settings.signatures.length > 0) {
+      signatures = settings.signatures;
+      // Update nextSignatureId to avoid conflicts
+      nextSignatureId = Math.max(...signatures.map(s => s.id || 0)) + 1;
+    } else if (settings.signature) {
+      // Migrate from old single signature
+      signatures = [{
+        id: 1,
+        title: chrome.i18n.getMessage('signature_default_title') || 'Default Signature',
+        content: settings.signature,
+        isHtml: settings.signature.includes('<')
+      }];
+      nextSignatureId = 2;
+    } else {
+      // No signatures at all
+      signatures = [];
+    }
+    
+    // Render signatures
+    renderSignatures();
     
   } catch (error) {
     console.error('Error loading settings:', error);
@@ -187,13 +355,32 @@ async function saveSettings() {
       return;
     }
     
+    // Collect signature data from the form
+    const signatureElements = document.querySelectorAll('.signature-item');
+    signatures = [];
+    
+    signatureElements.forEach(element => {
+      const sigId = parseInt(element.dataset.signatureId);
+      const title = element.querySelector('.signature-title-input').value.trim();
+      const content = element.querySelector('.signature-textarea').value.trim();
+      const isHtml = element.querySelector('.html-toggle').dataset.html === 'true';
+      
+      signatures.push({
+        id: sigId,
+        title: title || chrome.i18n.getMessage('signature_default_title') || 'Signature',
+        content: content,
+        isHtml: isHtml
+      });
+    });
+    
     // Collect all settings
     const settings = {
       apiKey: apiKey,
       model: document.getElementById('model').value,
       maxTokens: parseInt(document.getElementById('maxTokens').value),
       responseStyle: document.getElementById('responseStyle').value,
-      signature: document.getElementById('signature').value.trim(),
+      signatures: signatures, // New: array of signatures
+      signature: signatures.length > 0 ? signatures[0].content : '', // Legacy support
       defaultSender: document.getElementById('defaultSender').value.trim(),
       customPrompt: document.getElementById('customPrompt').value.trim(),
       language: document.getElementById('language').value

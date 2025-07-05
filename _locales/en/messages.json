@@ -261,5 +261,29 @@
   },
   "reset_success": {
     "message": "Settings reset"
+  },
+  "label_signatures": {
+    "message": "My Signatures:"
+  },
+  "add_signature": {
+    "message": "Add Signature"
+  },
+  "help_signatures": {
+    "message": "Create multiple signatures and select them when composing emails"
+  },
+  "signature_default_title": {
+    "message": "Signature"
+  },
+  "signature_title_placeholder": {
+    "message": "Signature name..."
+  },
+  "delete": {
+    "message": "Delete"
+  },
+  "cannot_delete_last_signature": {
+    "message": "Cannot delete the last signature"
+  },
+  "no_signature_option": {
+    "message": "No signature"
   }
 }

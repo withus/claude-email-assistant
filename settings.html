@@ -223,6 +223,82 @@
       color: #374151;
       white-space: pre-wrap;
     }
+    
+    .signature-item {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 12px;
+      margin-bottom: 12px;
+      position: relative;
+    }
+    
+    .signature-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    
+    .signature-title-input {
+      font-weight: 600;
+      border: 1px solid transparent;
+      background: transparent;
+      padding: 4px 8px;
+      border-radius: 4px;
+      flex: 1;
+      margin-right: 8px;
+    }
+    
+    .signature-title-input:focus {
+      border-color: #d1d5db;
+      background: white;
+    }
+    
+    .signature-actions {
+      display: flex;
+      gap: 4px;
+    }
+    
+    .signature-btn {
+      padding: 4px 8px;
+      font-size: 11px;
+      background: #e5e7eb;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .signature-btn:hover {
+      background: #d1d5db;
+    }
+    
+    .signature-btn.delete {
+      color: #dc2626;
+    }
+    
+    .signature-btn.delete:hover {
+      background: #fee2e2;
+    }
+    
+    .signature-textarea {
+      min-height: 80px;
+      margin-top: 8px;
+    }
+    
+    .signature-preview-small {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 4px;
+      padding: 8px;
+      margin-top: 8px;
+      font-size: 11px;
+      color: #374151;
+      min-height: 40px;
+      max-height: 100px;
+      overflow-y: auto;
+    }
   </style>
 </head>
 <body>
@@ -284,26 +360,16 @@
       <h3 class="section-title">👤 <span data-i18n="section_personal">Personal Settings</span></h3>
       
       <div class="form-group">
-        <label for="signature" data-i18n="label_signature">My Signature:</label>
-        <div style="display: flex; gap: 8px; margin-bottom: 4px;">
-          <button type="button" class="html-btn" id="toggleHtmlMode" style="padding: 4px 8px; font-size: 11px; background: #e5e7eb; border: none; border-radius: 4px; cursor: pointer;">
-            <span data-i18n="toggle_html">HTML Mode</span>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+          <label style="margin: 0;" data-i18n="label_signatures">My Signatures:</label>
+          <button type="button" id="addSignature" class="btn-primary" style="padding: 6px 12px; font-size: 12px; background: linear-gradient(135deg, #7B5FB2 0%, #4A90E2 100%);">
+            <span style="font-size: 16px; line-height: 1;">+</span> <span data-i18n="add_signature">Add Signature</span>
           </button>
-          <button type="button" class="html-btn" onclick="document.getElementById('signature').value += '<br>'" style="padding: 4px 8px; font-size: 11px; background: #e5e7eb; border: none; border-radius: 4px; cursor: pointer;">BR</button>
-          <button type="button" class="html-btn" onclick="document.getElementById('signature').value += '<b></b>'" style="padding: 4px 8px; font-size: 11px; background: #e5e7eb; border: none; border-radius: 4px; cursor: pointer;">B</button>
-          <button type="button" class="html-btn" onclick="document.getElementById('signature').value += '<a href=\"\"></a>'" style="padding: 4px 8px; font-size: 11px; background: #e5e7eb; border: none; border-radius: 4px; cursor: pointer;">Link</button>
         </div>
-        <textarea id="signature" class="signature-textarea" data-i18n-placeholder="placeholder_signature" placeholder="Best regards,
-
-John Doe
-Senior Developer
-john@example.com
-+1 234 567 8900"></textarea>
-        <div class="help-text"><span data-i18n="help_signature">Automatically added to every response</span> <span data-i18n="help_signature_html">(HTML supported)</span></div>
-        <div style="margin-top: 8px;">
-          <label style="font-size: 12px; color: #6b7280;"><span data-i18n="preview_label">Preview:</span></label>
-          <div class="signature-preview" id="signaturePreview" style="display: block; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 4px; padding: 12px; margin-top: 4px; min-height: 50px;"></div>
+        <div id="signaturesContainer">
+          <!-- Signatures will be dynamically added here -->
         </div>
+        <div class="help-text" data-i18n="help_signatures">Create multiple signatures and select them when composing emails</div>
       </div>
       
       <div class="form-group">

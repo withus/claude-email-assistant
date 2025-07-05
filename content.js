@@ -409,6 +409,9 @@ function createPreviewModal(emailData, reply) {
       
       <div class="claude-modal-footer">
         <div class="claude-footer-left">
+          <select id="claude-signature-select" class="claude-signature-dropdown" style="padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 13px; margin-right: 8px;">
+            <!-- Signatures will be populated here -->
+          </select>
           <button class="claude-btn claude-btn-secondary" id="claude-copy">📋 ${i18n.getMessage('button_copy')}</button>
         </div>
         <div class="claude-footer-right">
@@ -476,16 +479,30 @@ function setupModalEventListeners(modal) {
   });
   
   // Copy button
-  modal.querySelector('#claude-copy').addEventListener('click', () => {
-    const text = modal.querySelector('.claude-response-textarea').value;
+  modal.querySelector('#claude-copy').addEventListener('click', async () => {
+    let text = modal.querySelector('.claude-response-textarea').value;
+    
+    // Append selected signature
+    const selectedSignature = await getSelectedSignature(modal);
+    if (selectedSignature && selectedSignature.content) {
+      text += '\n\n' + selectedSignature.content;
+    }
+    
     navigator.clipboard.writeText(text).then(() => {
       showToast(chrome.i18n.getMessage('toast_copied'), 'success');
     });
   });
   
   // Accept button
-  modal.querySelector('#claude-accept').addEventListener('click', () => {
-    const text = modal.querySelector('.claude-response-textarea').value;
+  modal.querySelector('#claude-accept').addEventListener('click', async () => {
+    let text = modal.querySelector('.claude-response-textarea').value;
+    
+    // Append selected signature
+    const selectedSignature = await getSelectedSignature(modal);
+    if (selectedSignature && selectedSignature.content) {
+      text += '\n\n' + selectedSignature.content;
+    }
+    
     insertReplyIntoGmail(text);
     closeModal(modal);
     showToast(chrome.i18n.getMessage('toast_inserted'), 'success');
@@ -811,18 +828,19 @@ Important instructions:
 - Write a complete email based on the user's request
 - Include an appropriate subject line if requested
 - Use appropriate salutation and closing based on context
-- Make the email ready to send` :
+- Make the email ready to send
+- Do NOT include any signature (signatures are handled separately)` :
     `You are a professional email assistant. Write responses that are ${style}.
 
 Important instructions:
 - Respond in ${language}
 - Address all important points in the email
 - Use appropriate salutation based on context
-- End with a suitable closing phrase`;
+- End with a suitable closing phrase
+- Do NOT include any signature (signatures are handled separately)`;
 
-  if (settings.signature) {
-    prompt += `\n- Automatically add this signature at the end:\n${settings.signature}`;
-  }
+  // Note: We don't add signature to the prompt anymore
+  // Signatures are now handled separately and appended only on copy/insert
   
   if (settings.defaultSender) {
     prompt += `\n- My name is ${settings.defaultSender}`;
@@ -904,6 +922,52 @@ function insertReplyText(text) {
   
   // Event triggern damit Gmail die Änderung registriert
   composeBox.dispatchEvent(new Event('input', { bubbles: true }));
+}
+
+// Populate signature dropdown
+async function populateSignatureDropdown(modal) {
+  const dropdown = modal.querySelector('#claude-signature-select');
+  if (!dropdown) return;
+  
+  try {
+    const settings = await getSettings();
+    const signatures = settings.signatures || [];
+    
+    // Clear existing options
+    dropdown.innerHTML = '';
+    
+    // Add "No signature" option
+    const noSigOption = document.createElement('option');
+    noSigOption.value = '';
+    noSigOption.textContent = chrome.i18n.getMessage('no_signature_option') || 'No signature';
+    dropdown.appendChild(noSigOption);
+    
+    // Add signatures
+    signatures.forEach((sig, index) => {
+      const option = document.createElement('option');
+      option.value = sig.id;
+      option.textContent = sig.title || `Signature ${index + 1}`;
+      if (index === 0) option.selected = true; // Select first signature by default
+      dropdown.appendChild(option);
+    });
+  } catch (error) {
+    console.error('Error loading signatures:', error);
+  }
+}
+
+// Get selected signature
+async function getSelectedSignature(modal) {
+  const dropdown = modal.querySelector('#claude-signature-select');
+  if (!dropdown || !dropdown.value) return null;
+  
+  try {
+    const settings = await getSettings();
+    const signatures = settings.signatures || [];
+    return signatures.find(sig => sig.id == dropdown.value);
+  } catch (error) {
+    console.error('Error getting signature:', error);
+    return null;
+  }
 }
 
 // Hilfsfunktion: Auf Element warten

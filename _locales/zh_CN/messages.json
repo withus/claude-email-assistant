@@ -261,5 +261,29 @@
   },
   "no_signature_preview": {
     "message": "未设置签名"
+  },
+  "label_signatures": {
+    "message": "我的签名："
+  },
+  "add_signature": {
+    "message": "添加签名"
+  },
+  "help_signatures": {
+    "message": "创建多个签名并在撰写邮件时选择"
+  },
+  "signature_default_title": {
+    "message": "签名"
+  },
+  "signature_title_placeholder": {
+    "message": "签名名称..."
+  },
+  "delete": {
+    "message": "删除"
+  },
+  "cannot_delete_last_signature": {
+    "message": "无法删除最后一个签名"
+  },
+  "no_signature_option": {
+    "message": "无签名"
   }
 }

@@ -261,5 +261,29 @@
   },
   "reset_success": {
     "message": "Einstellungen zurückgesetzt"
+  },
+  "label_signatures": {
+    "message": "Meine Signaturen:"
+  },
+  "add_signature": {
+    "message": "Signatur hinzufügen"
+  },
+  "help_signatures": {
+    "message": "Erstellen Sie mehrere Signaturen und wählen Sie diese beim Verfassen von E-Mails aus"
+  },
+  "signature_default_title": {
+    "message": "Signatur"
+  },
+  "signature_title_placeholder": {
+    "message": "Signaturname..."
+  },
+  "delete": {
+    "message": "Löschen"
+  },
+  "cannot_delete_last_signature": {
+    "message": "Die letzte Signatur kann nicht gelöscht werden"
+  },
+  "no_signature_option": {
+    "message": "Keine Signatur"
   }
 }

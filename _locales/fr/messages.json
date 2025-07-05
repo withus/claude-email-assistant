@@ -261,5 +261,29 @@
   },
   "no_signature_preview": {
     "message": "Aucune signature définie"
+  },
+  "label_signatures": {
+    "message": "Mes Signatures :"
+  },
+  "add_signature": {
+    "message": "Ajouter Signature"
+  },
+  "help_signatures": {
+    "message": "Créez plusieurs signatures et sélectionnez-les lors de la rédaction d'emails"
+  },
+  "signature_default_title": {
+    "message": "Signature"
+  },
+  "signature_title_placeholder": {
+    "message": "Nom de la signature..."
+  },
+  "delete": {
+    "message": "Supprimer"
+  },
+  "cannot_delete_last_signature": {
+    "message": "Impossible de supprimer la dernière signature"
+  },
+  "no_signature_option": {
+    "message": "Pas de signature"
   }
 }

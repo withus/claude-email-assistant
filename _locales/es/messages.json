@@ -261,5 +261,29 @@
   },
   "reset_success": {
     "message": "Configuración restablecida"
+  },
+  "label_signatures": {
+    "message": "Mis Firmas:"
+  },
+  "add_signature": {
+    "message": "Añadir Firma"
+  },
+  "help_signatures": {
+    "message": "Crea múltiples firmas y selecciónalas al redactar emails"
+  },
+  "signature_default_title": {
+    "message": "Firma"
+  },
+  "signature_title_placeholder": {
+    "message": "Nombre de la firma..."
+  },
+  "delete": {
+    "message": "Eliminar"
+  },
+  "cannot_delete_last_signature": {
+    "message": "No se puede eliminar la última firma"
+  },
+  "no_signature_option": {
+    "message": "Sin firma"
   }
 }
