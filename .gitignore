@@ -1,5 +1,7 @@
 # Chrome Extension specific
 *.crx
+*.zip
+*.tar.gz
 *.pem
 key.pem
 

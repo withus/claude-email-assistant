@@ -9,7 +9,7 @@
 
 # 2. After creating the empty repository, run these commands:
 
-cd /root/projekte/claude-email-assistant-en
+cd /path/to/claude-email-assistant
 
 # Configure git (replace with your details)
 git config user.name "Your Name"

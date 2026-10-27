@@ -20,14 +20,14 @@
 
 ```bash
 # Method 1: ZIP file (Recommended)
-cd /root/projekte/claude-email-assistant-en
-zip -r claude-email-assistant.zip * -x "*.git*" -x "*.md" -x "push-to-github.sh" -x "logo.png" -x "GITHUB_TOKEN_GUIDE.md" -x "RELEASE_INSTRUCTIONS.md" -x "github-release-commands.txt"
+cd /path/to/claude-email-assistant
+zip -r claude-email-assistant.zip * -x "*.git*" -x "*.md" -x "logo.png" -x "docs/*"
 
 # Method 2: Chrome Pack Extension
 # 1. Open chrome://extensions/
 # 2. Enable Developer mode
 # 3. Click "Pack extension"
-# 4. Select folder: /root/projekte/claude-email-assistant-en
+# 4. Select folder: /path/to/claude-email-assistant
 # 5. Leave private key blank (first time)
 ```
 
@@ -222,15 +222,12 @@ Claude Email Assistant does NOT collect, store, or transmit any personal data or
 
 ```bash
 # Create release package
-cd /root/projekte/claude-email-assistant-en
+cd /path/to/claude-email-assistant
 zip -r claude-email-assistant-v1.0.0.zip * \
   -x "*.git*" \
   -x "*.md" \
-  -x "push-to-github.sh" \
   -x "logo.png" \
-  -x "*_INSTRUCTIONS*" \
-  -x "*_GUIDE*" \
-  -x "github-release-commands.txt"
+  -x "docs/*"
 
 # Verify package contents
 unzip -l claude-email-assistant-v1.0.0.zip

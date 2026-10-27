@@ -17,7 +17,7 @@ After creating the empty repository, run these commands in your terminal:
 
 ```bash
 # Navigate to the project directory
-cd /root/projekte/claude-email-assistant-en
+cd /path/to/claude-email-assistant
 
 # Add your GitHub repository as remote
 # Replace YOUR_USERNAME with your actual GitHub username
@@ -62,7 +62,7 @@ To create a .crx file for distribution:
 1. Go to chrome://extensions/
 2. Enable Developer mode
 3. Click "Pack extension"
-4. Browse to: /root/projekte/claude-email-assistant-en
+4. Browse to: /path/to/claude-email-assistant
 5. Click "Pack Extension"
 ```
 
@@ -127,7 +127,7 @@ Share your extension:
 
 ```bash
 # Complete push sequence
-cd /root/projekte/claude-email-assistant-en
+cd /path/to/claude-email-assistant
 git remote add origin https://github.com/YOUR_USERNAME/claude-email-assistant.git
 git branch -M main
 git push -u origin main

@@ -23,7 +23,7 @@ Since direct GitHub integration isn't available in this environment, here's how 
 3. **Push to GitHub**
    Run these commands in your terminal:
    ```bash
-   cd /root/projekte/claude-email-assistant-en
+   cd /path/to/claude-email-assistant
    
    # Set your GitHub username
    GITHUB_USERNAME="YOUR_GITHUB_USERNAME"
@@ -45,7 +45,7 @@ Since direct GitHub integration isn't available in this environment, here's how 
 
 1. Copy the project to Windows:
    ```bash
-   cp -r /root/projekte/claude-email-assistant-en /mnt/c/Users/svenw/Desktop/claude-email-assistant
+   cp -r /path/to/claude-email-assistant /path/to/destination/claude-email-assistant
    ```
 
 2. Open GitHub Desktop
@@ -56,7 +56,7 @@ Since direct GitHub integration isn't available in this environment, here's how 
 
 If you have SSH keys set up:
 ```bash
-cd /root/projekte/claude-email-assistant-en
+cd /path/to/claude-email-assistant
 git remote add origin git@github.com:YOUR_USERNAME/claude-email-assistant.git
 git branch -M main
 git push -u origin main
